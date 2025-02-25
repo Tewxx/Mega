@@ -1,12 +1,14 @@
 import org.apache.commons.lang3.SystemUtils
 
 plugins {
-    idea
-    java
+    kotlin("jvm") version "1.8.22"
     id("gg.essential.loom") version "0.10.0.+"
     id("dev.architectury.architectury-pack200") version "0.1.3"
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    idea
+    java
 }
+
 
 //Constants:
 
@@ -27,9 +29,9 @@ loom {
     log4jConfigs.from(file("log4j2.xml"))
     launchConfigs {
         "client" {
-            // If you don't want mixins, remove these lines
-            property("mixin.debug", "true")
-            arg("--tweakClass", "org.spongepowered.asm.launch.MixinTweaker")
+            property("mixin.debug", "false")
+            property("asmhelper.verbose", "false")
+            arg("--tweakClass", "gg.essential.loader.stage0.EssentialSetupTweaker")
         }
     }
     runConfigs {
@@ -65,7 +67,9 @@ sourceSets.main {
 repositories {
     mavenCentral()
     maven("https://repo.spongepowered.org/maven/")
-    // If you don't want to log in with your real minecraft account, remove this line
+    maven("https://repo.essential.gg/repository/maven-public")
+    maven("https://repo.nea.moe/releases")
+
     maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
 }
 
@@ -77,6 +81,12 @@ dependencies {
     minecraft("com.mojang:minecraft:1.8.9")
     mappings("de.oceanlabs.mcp:mcp_stable:22-1.8.9")
     forge("net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9")
+
+    shadowImpl("gg.essential:loader-launchwrapper:1.1.3")
+    implementation("gg.essential:essential-1.8.9-forge:11092+gecb85a783")
+    shadowImpl("io.socket:engine.io-client:2.1.0:")
+    shadowImpl("moe.nea:libautoupdate:1.3.1")
+    shadowImpl("org.reflections:reflections:0.10.2")
 
     // If you don't want mixins, remove these lines
     shadowImpl("org.spongepowered:mixin:0.7.11-SNAPSHOT") {

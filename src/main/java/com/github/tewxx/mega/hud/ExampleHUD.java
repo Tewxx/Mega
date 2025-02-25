@@ -7,7 +7,7 @@ import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
+@SuppressWarnings("unused")
 public class ExampleHUD {
 
     @SubscribeEvent

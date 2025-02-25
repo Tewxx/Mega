@@ -7,12 +7,9 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.Minecraft;
 
-
-
 import java.util.List;
 import java.io.IOException;
 import java.util.ArrayList;
-
 public class ExampleCommand extends CommandBase {
 
     @Override

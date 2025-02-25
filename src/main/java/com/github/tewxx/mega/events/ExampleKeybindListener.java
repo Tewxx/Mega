@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import org.lwjgl.input.Keyboard;
 
 import java.io.IOException;
+@SuppressWarnings("unused")
 
 public class ExampleKeybindListener {
 

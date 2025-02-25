@@ -3,7 +3,6 @@ package com.github.tewxx.mega.config;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
-
 public class ConfigHandler {
 
     private static Configuration config;

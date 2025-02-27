@@ -349,21 +349,20 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 isTransparent = !isTransparent
                 HomeCombatColorChangeArea.setColor(if (isTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
                 println("Combat Clicked")
-                // RGB Changers
+
                 if (isTransparent) {
                     CombatText.setColor(Color.WHITE)
                     HomeCombatIcon.setColor(Color.WHITE)
                 } else {
-                    // Start RGB color
                     Timer().scheduleAtFixedRate(object : TimerTask() {
                         override fun run() {
                             HomeCombatIcon.setColor(GuiUtils.rainbowColor.get())
                             CombatText.setColor(GuiUtils.rainbowColor.get())
-
                         }
-                    }, 0, 100)
+                    }, 0, 50)
                 }
             }
+
 
             val HomeBlatantClickArea = UIBlock().constrain {
                 color = Color(31, 30, 31, 0).constraint

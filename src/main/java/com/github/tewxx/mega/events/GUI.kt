@@ -345,24 +345,28 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 height = (52 / scalefactor).pixels()
             } childOf window
 
+            var combatIsTransparent = true
+            var combatTimer: Timer? = null
             HomeCombatClickArea.onMouseClick {
-                isTransparent = !isTransparent
-                HomeCombatColorChangeArea.setColor(if (isTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
+                combatIsTransparent = !combatIsTransparent
+                HomeCombatColorChangeArea.setColor(if (combatIsTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
                 println("Combat Clicked")
-
-                if (isTransparent) {
+                if (combatIsTransparent) {
                     CombatText.setColor(Color.WHITE)
                     HomeCombatIcon.setColor(Color.WHITE)
+                    combatTimer?.cancel()
+                    combatTimer = null
                 } else {
-                    Timer().scheduleAtFixedRate(object : TimerTask() {
-                        override fun run() {
-                            HomeCombatIcon.setColor(GuiUtils.rainbowColor.get())
-                            CombatText.setColor(GuiUtils.rainbowColor.get())
-                        }
-                    }, 0, 50)
+                    combatTimer = Timer().apply {
+                        scheduleAtFixedRate(object : TimerTask() {
+                            override fun run() {
+                                HomeCombatIcon.setColor(GuiUtils.rainbowColor.get())
+                                CombatText.setColor(GuiUtils.rainbowColor.get())
+                            }
+                        }, 0, 50)
+                    }
                 }
             }
-
 
             val HomeBlatantClickArea = UIBlock().constrain {
                 color = Color(31, 30, 31, 0).constraint
@@ -372,10 +376,27 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 height = (52 / scalefactor).pixels()
             } childOf window
 
+            var blatantIsTransparent = true
+            var blatantTimer: Timer? = null
             HomeBlatantClickArea.onMouseClick {
-                isTransparent = !isTransparent
-                HomeBlatantColorChangeArea.setColor(if (isTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
+                blatantIsTransparent = !blatantIsTransparent
+                HomeBlatantColorChangeArea.setColor(if (blatantIsTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
                 println("Blatant Clicked")
+                if (blatantIsTransparent) {
+                    BlatantText.setColor(Color.WHITE)
+                    HomeBlatantIcon.setColor(Color.WHITE)
+                    blatantTimer?.cancel()
+                    blatantTimer = null
+                } else {
+                    blatantTimer = Timer().apply {
+                        scheduleAtFixedRate(object : TimerTask() {
+                            override fun run() {
+                                HomeBlatantIcon.setColor(GuiUtils.rainbowColor.get())
+                                BlatantText.setColor(GuiUtils.rainbowColor.get())
+                            }
+                        }, 0, 50)
+                    }
+                }
             }
 
             val HomeRenderClickArea = UIBlock().constrain {
@@ -386,10 +407,27 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 height = (52 / scalefactor).pixels()
             } childOf window
 
+            var renderIsTransparent = true
+            var renderTimer: Timer? = null
             HomeRenderClickArea.onMouseClick {
-                isTransparent = !isTransparent
-                HomeRenderColorChangeArea.setColor(if (isTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
+                renderIsTransparent = !renderIsTransparent
+                HomeRenderColorChangeArea.setColor(if (renderIsTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
                 println("Render Clicked")
+                if (renderIsTransparent) {
+                    RenderText.setColor(Color.WHITE)
+                    HomeRenderIcon.setColor(Color.WHITE)
+                    renderTimer?.cancel()
+                    renderTimer = null
+                } else {
+                    renderTimer = Timer().apply {
+                        scheduleAtFixedRate(object : TimerTask() {
+                            override fun run() {
+                                HomeRenderIcon.setColor(GuiUtils.rainbowColor.get())
+                                RenderText.setColor(GuiUtils.rainbowColor.get())
+                            }
+                        }, 0, 50)
+                    }
+                }
             }
 
             val HomeUtilityClickArea = UIBlock().constrain {
@@ -400,10 +438,27 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 height = (52 / scalefactor).pixels()
             } childOf window
 
+            var utilityIsTransparent = true
+            var utilityTimer: Timer? = null
             HomeUtilityClickArea.onMouseClick {
-                isTransparent = !isTransparent
-                HomeUtilityColorChangeArea.setColor(if (isTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
+                utilityIsTransparent = !utilityIsTransparent
+                HomeUtilityColorChangeArea.setColor(if (utilityIsTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
                 println("Utility Clicked")
+                if (utilityIsTransparent) {
+                    UtilityText.setColor(Color.WHITE)
+                    HomeUtilityIcon.setColor(Color.WHITE)
+                    utilityTimer?.cancel()
+                    utilityTimer = null
+                } else {
+                    utilityTimer = Timer().apply {
+                        scheduleAtFixedRate(object : TimerTask() {
+                            override fun run() {
+                                HomeUtilityIcon.setColor(GuiUtils.rainbowColor.get())
+                                UtilityText.setColor(GuiUtils.rainbowColor.get())
+                            }
+                        }, 0, 50)
+                    }
+                }
             }
 
             val HomeWorldClickArea = UIBlock().constrain {
@@ -414,10 +469,27 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 height = (52 / scalefactor).pixels()
             } childOf window
 
+            var worldIsTransparent = true
+            var worldTimer: Timer? = null
             HomeWorldClickArea.onMouseClick {
-                isTransparent = !isTransparent
-                HomeWorldColorChangeArea.setColor(if (isTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
+                worldIsTransparent = !worldIsTransparent
+                HomeWorldColorChangeArea.setColor(if (worldIsTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
                 println("World Clicked")
+                if (worldIsTransparent) {
+                    WorldText.setColor(Color.WHITE)
+                    HomeWorldIcon.setColor(Color.WHITE)
+                    worldTimer?.cancel()
+                    worldTimer = null
+                } else {
+                    worldTimer = Timer().apply {
+                        scheduleAtFixedRate(object : TimerTask() {
+                            override fun run() {
+                                HomeWorldIcon.setColor(GuiUtils.rainbowColor.get())
+                                WorldText.setColor(GuiUtils.rainbowColor.get())
+                            }
+                        }, 0, 50)
+                    }
+                }
             }
 
             val HomeInventoryClickArea = UIBlock().constrain {
@@ -428,19 +500,34 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 height = (52 / scalefactor).pixels()
             } childOf window
 
+            var inventoryIsTransparent = true
+            var inventoryTimer: Timer? = null
             HomeInventoryClickArea.onMouseClick {
-                isTransparent = !isTransparent
-                HomeInventoryColorChangeArea.setColor(if (isTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
+                inventoryIsTransparent = !inventoryIsTransparent
+                HomeInventoryColorChangeArea.setColor(if (inventoryIsTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
                 println("Inventory Clicked")
+                if (inventoryIsTransparent) {
+                    InventoryText.setColor(Color.WHITE)
+                    HomeInventoryIcon.setColor(Color.WHITE)
+                    inventoryTimer?.cancel()
+                    inventoryTimer = null
+                } else {
+                    inventoryTimer = Timer().apply {
+                        scheduleAtFixedRate(object : TimerTask() {
+                            override fun run() {
+                                HomeInventoryIcon.setColor(GuiUtils.rainbowColor.get())
+                                InventoryText.setColor(GuiUtils.rainbowColor.get())
+                            }
+                        }, 0, 50)
+                    }
+                }
             }
 
             // RGB
-
             Timer().scheduleAtFixedRate(object : TimerTask() {
                 override fun run() {
                     HomeV4Image.setColor(GuiUtils.rainbowColor.get())
                 }
-            }, 0, 100)
-
+            }, 0, 50)
         }
 }

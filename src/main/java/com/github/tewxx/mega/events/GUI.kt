@@ -16,6 +16,7 @@ import java.net.URL
 
 class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackground = false) {
     private var isTransparent = true
+    private var isCombatTabVisible = false
 
     override fun onDrawScreen(matrixStack: UMatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawDefaultBackground()
@@ -32,7 +33,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
 
         init {
             // Main Elementa Stuff
-            //Inspector(window) childOf window
+            Inspector(window) childOf window
             //Home
 
             val HomeBack = UIRoundedRectangle(3f).constrain {
@@ -345,7 +346,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             HomeCombatClickArea.onMouseClick {
                 isTransparent = !isTransparent
                 HomeCombatColorChangeArea.setColor(if (isTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
-                println("hi")
+                println("Combat Clicked")
             }
 
             val HomeBlatantClickArea = UIBlock().constrain {
@@ -359,7 +360,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             HomeBlatantClickArea.onMouseClick {
                 isTransparent = !isTransparent
                 HomeBlatantColorChangeArea.setColor(if (isTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
-                println("hi")
+                println("Blatant Clicked")
             }
 
             val HomeRenderClickArea = UIBlock().constrain {
@@ -373,7 +374,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             HomeRenderClickArea.onMouseClick {
                 isTransparent = !isTransparent
                 HomeRenderColorChangeArea.setColor(if (isTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
-                println("hi")
+                println("Render Clicked")
             }
 
             val HomeUtilityClickArea = UIBlock().constrain {
@@ -387,7 +388,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             HomeUtilityClickArea.onMouseClick {
                 isTransparent = !isTransparent
                 HomeUtilityColorChangeArea.setColor(if (isTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
-                println("hi")
+                println("Utility Clicked")
             }
 
             val HomeWorldClickArea = UIBlock().constrain {
@@ -401,7 +402,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             HomeWorldClickArea.onMouseClick {
                 isTransparent = !isTransparent
                 HomeWorldColorChangeArea.setColor(if (isTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
-                println("hi")
+                println("World Clicked")
             }
 
             val HomeInventoryClickArea = UIBlock().constrain {
@@ -415,14 +416,8 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             HomeInventoryClickArea.onMouseClick {
                 isTransparent = !isTransparent
                 HomeInventoryColorChangeArea.setColor(if (isTransparent) Color(31, 30, 31, 0) else Color(31, 30, 31, 255))
-                println("hi")
+                println("Inventory Clicked")
             }
-
-            // Combat Tab!!
-
-
-
-
 
         }
 }

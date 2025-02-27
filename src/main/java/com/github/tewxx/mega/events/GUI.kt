@@ -30,7 +30,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
 
     init {
         // Main Elementa Stuff
-        Inspector(window) childOf window
+        //Inspector(window) childOf window
         //Home
         val HomeBack = UIRoundedRectangle(3f).constrain {
             color = Color(0x1A191A).constraint
@@ -72,39 +72,210 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             height = (32 / 2.5).pixels()
         } childOf window
 
-        val HomeVapeImage = UIImage.ofURL(URL("https://raw.githubusercontent.com/Tewxx/Mega/refs/heads/master/src/main/resources/assets/tewxx/8x.png")).constrain {
-            x = (59/2.5).pixels(alignOpposite = false)
+        val HomeVapeImage = UIImage.ofResource("/assets/tewxx/logo.png").constrain {
+        x = (59/2.5).pixels(alignOpposite = false)
             y = (62/2.5).pixels(alignOpposite = false)
             width = (82 / 2.5).pixels()
             height = (22 / 2.5).pixels()
         } childOf window
 
-        val HomeV4Image = UIImage.ofURL(URL("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/refs/heads/main/assets/new/textv4.png")).constrain {
+        val HomeV4Image = UIImage.ofResource("/assets/tewxx/v4.png").constrain {
             x = (141/2.5).pixels(alignOpposite = false)
             y = (62/2.5).pixels(alignOpposite = false)
             width = (29 / 2.5).pixels()
             height = (16 / 2.5).pixels()
         } childOf window
 
-        val HomeSettingsImage = UIImage.ofURL(URL("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/refs/heads/main/assets/new/customsettings.png")).constrain {
-            color = Color(255,255,255,127).constraint // Makes it half transparent
+        val HomeSettingsImage = UIImage.ofResource("/assets/tewxx/settings.png").constrain {
+            color = Color(255,255,255,100).constraint // Makes it half transparent
             x = (306/2.5).pixels(alignOpposite = false)
             y = (62/2.5).pixels(alignOpposite = false)
             width = (22 / 2.5).pixels()
             height = (22 / 2.5).pixels()
         } childOf window
+        // Home - Left icons
+        val HomeCombatIcon = UIImage.ofResource("/assets/tewxx/combaticon.png").constrain {
+            x = (67/2.5).pixels(alignOpposite = false)
+            y = (112/2.5).pixels(alignOpposite = false)
+            width = (20 / 2.5).pixels()
+            height = (22 / 2.5).pixels()
+        } childOf window
 
-        UIText("Hello World").constrain {
-            textScale = 1.pixels()
-            x = CenterConstraint()
-            y = CenterConstraint()
-        } childOf HomeBack
+        val HomeBlatantIcon = UIImage.ofResource("/assets/tewxx/blatanticon.png").constrain {
+            x = (67/2.5).pixels(alignOpposite = false)
+            y = (165/2.5).pixels(alignOpposite = false)
+            width = (20 / 2.5).pixels()
+            height = (20 / 2.5).pixels()
+        } childOf window
 
-        UIText("Sibling").constrain {
+        val HomeRenderIcon = UIImage.ofResource("/assets/tewxx/rendericon.png").constrain {
+            x = (67/2.5).pixels(alignOpposite = false)
+            y = (216/2.5).pixels(alignOpposite = false)
+            width = (20 / 2.5).pixels()
+            height = (19 / 2.5).pixels()
+        } childOf window
+
+        val HomeUtilityIcon = UIImage.ofResource("/assets/tewxx/utilityicon.png").constrain {
+            x = (67/2.5).pixels(alignOpposite = false)
+            y = (270/2.5).pixels(alignOpposite = false)
+            width = (19 / 2.5).pixels()
+            height = (18 / 2.5).pixels()
+        } childOf window
+
+        val HomeWorldIcon = UIImage.ofResource("/assets/tewxx/worldicon.png").constrain {
+            x = (67/2.5).pixels(alignOpposite = false)
+            y = (321/2.5).pixels(alignOpposite = false)
+            width = (20 / 2.5).pixels()
+            height = (20 / 2.5).pixels()
+        } childOf window
+
+        val HomeInventoryIcon = UIImage.ofResource("/assets/tewxx/inventoryicon.png").constrain {
+            x = (67/2.5).pixels(alignOpposite = false)
+            y = (374/2.5).pixels(alignOpposite = false)
+            width = (20 / 2.5).pixels()
+            height = (19 / 2.5).pixels()
+        } childOf window
+
+        // Home - text
+
+        UIText("Combat").constrain {
             textScale = 1.pixels()
-            x = CenterConstraint()
-            y = SiblingConstraint(4f, alignOpposite = true)
-        } childOf HomeBack
+            x = (97/2.5).pixels(alignOpposite = false)
+            y = (112/2.5).pixels(alignOpposite = false)
+        } childOf window
+
+        UIText("Blatant").constrain {
+            textScale = 1.pixels()
+            x = (97/2.5).pixels(alignOpposite = false)
+            y = (165/2.5).pixels(alignOpposite = false)
+        } childOf window
+
+        UIText("Render").constrain {
+            textScale = 1.pixels()
+            x = (97/2.5).pixels(alignOpposite = false)
+            y = (216/2.5).pixels(alignOpposite = false)
+        } childOf window
+
+        UIText("Utility").constrain {
+            textScale = 1.pixels()
+            x = (97/2.5).pixels(alignOpposite = false)
+            y = (270/2.5).pixels(alignOpposite = false)
+        } childOf window
+
+        UIText("World").constrain {
+            textScale = 1.pixels()
+            x = (97/2.5).pixels(alignOpposite = false)
+            y = (321/2.5).pixels(alignOpposite = false)
+        } childOf window
+
+        UIText("Inventory").constrain {
+            textScale = 1.pixels()
+            x = (97/2.5).pixels(alignOpposite = false)
+            y = (374/2.5).pixels(alignOpposite = false)
+        } childOf window
+
+        UIText("Misc").constrain {
+            textScale = 0.95.pixels()
+            x = (60 / 2.5).pixels(alignOpposite = false)
+            y = (415 / 2.5).pixels(alignOpposite = false)
+        } childOf window
+
+        UIText("Friends").constrain {
+            textScale = 0.95.pixels()
+            x = (60 / 2.5).pixels(alignOpposite = false)
+            y = (458 / 2.5).pixels(alignOpposite = false)
+        } childOf window
+
+        UIText("Profiles").constrain {
+            textScale = 0.95.pixels()
+            x = (60 / 2.5).pixels(alignOpposite = false)
+            y = (508 / 2.5).pixels(alignOpposite = false)
+        } childOf window
+
+        UIText("Macros").constrain {
+            textScale = 0.95.pixels()
+            x = (60 / 2.5).pixels(alignOpposite = false)
+            y = (558 / 2.5).pixels(alignOpposite = false)
+        } childOf window
+
+        UIText("Recreated by Mega").constrain {
+            color = Color(255,255,255,100).constraint // Makes it half transparent
+            textScale = 0.50.pixels()
+            x = (60 / 2.5).pixels(alignOpposite = false)
+            y = (612 / 2.5).pixels(alignOpposite = false)
+        } childOf window
+
+        UIText("Myau 4.17").constrain {
+            color = Color(255,255,255,100).constraint // Makes it half transparent
+            textScale = 0.50.pixels()
+            x = (275 / 2.5).pixels(alignOpposite = false)
+            y = (612 / 2.5).pixels(alignOpposite = false)
+        } childOf window
+
+        // Home - arrows
+
+        val ArrowCombat = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
+            x = (233/2.5).pixels(alignOpposite = false)
+            y = (73/2.5).pixels(alignOpposite = false)
+            width = (100 / 2.5).pixels()
+            height = (100 / 2.5).pixels()
+        } childOf window
+
+        val ArrowBlatant = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
+            x = (233/2.5).pixels(alignOpposite = false)
+            y = (125/2.5).pixels(alignOpposite = false)
+            width = (100 / 2.5).pixels()
+            height = (100 / 2.5).pixels()
+        } childOf window
+
+        val ArrowRender = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
+            x = (233/2.5).pixels(alignOpposite = false)
+            y = (175/2.5).pixels(alignOpposite = false)
+            width = (100 / 2.5).pixels()
+            height = (100 / 2.5).pixels()
+        } childOf window
+
+        val ArrowUtility = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
+            x = (233/2.5).pixels(alignOpposite = false)
+            y = (229/2.5).pixels(alignOpposite = false)
+            width = (100 / 2.5).pixels()
+            height = (100 / 2.5).pixels()
+        } childOf window
+
+        val ArrowWorld = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
+            x = (233/2.5).pixels(alignOpposite = false)
+            y = (281/2.5).pixels(alignOpposite = false)
+            width = (100 / 2.5).pixels()
+            height = (100 / 2.5).pixels()
+        } childOf window
+
+        val ArrowInventory = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
+            x = (233/2.5).pixels(alignOpposite = false)
+            y = (333/2.5).pixels(alignOpposite = false)
+            width = (100 / 2.5).pixels()
+            height = (100 / 2.5).pixels()
+        } childOf window
+
+        val ArrowFriends = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
+            x = (233/2.5).pixels(alignOpposite = false)
+            y = (418/2.5).pixels(alignOpposite = false)
+            width = (100 / 2.5).pixels()
+            height = (100 / 2.5).pixels()
+        } childOf window
+
+        val ArrowProfiles = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
+            x = (233/2.5).pixels(alignOpposite = false)
+            y = (468/2.5).pixels(alignOpposite = false)
+            width = (100 / 2.5).pixels()
+            height = (100 / 2.5).pixels()
+        } childOf window
+
+        val ArrowMacros = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
+            x = (233/2.5).pixels(alignOpposite = false)
+            y = (522/2.5).pixels(alignOpposite = false)
+            width = (100 / 2.5).pixels()
+            height = (100 / 2.5).pixels()
+        } childOf window
 
     }
 }

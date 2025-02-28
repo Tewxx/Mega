@@ -1,23 +1,23 @@
 package com.github.tewxx.mega.events
 
+import GuiUtils
+import gg.essential.api.utils.GuiUtil
 import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.WindowScreen
-import gg.essential.elementa.components.UIBlock
-import gg.essential.elementa.components.UIImage
-import gg.essential.elementa.components.UIRoundedRectangle
-import gg.essential.elementa.components.UIText
-import gg.essential.elementa.components.inspector.Inspector
+import gg.essential.elementa.components.*
+import gg.essential.elementa.constraints.ChildBasedMaxSizeConstraint
+import gg.essential.elementa.constraints.ChildBasedSizeConstraint
+import gg.essential.elementa.constraints.SiblingConstraint
 import gg.essential.elementa.dsl.*
+import gg.essential.elementa.effects.OutlineEffect
 import gg.essential.universal.UMatrixStack
 import java.awt.Color
-import java.util.Timer
-import java.util.TimerTask
-import kotlin.math.sin
-import kotlin.math.PI
+import java.util.*
 
 class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackground = false) {
     private var isTransparent = true
     private var isCombatTabVisible = false
+
 
     override fun onDrawScreen(matrixStack: UMatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawDefaultBackground()
@@ -34,7 +34,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
 
         init {
             // Main Elementa Stuff
-            Inspector(window) childOf window
+            //Inspector(window) childOf window
             val scalefactor = 2.5;
             //Home
 
@@ -335,8 +335,392 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 height = (100 / scalefactor).pixels()
             } childOf window
 
-            // Home Click Detectors
+            // RGB for Logo
+            Timer().scheduleAtFixedRate(object : TimerTask() {
+                override fun run() {
+                    HomeV4Image.setColor(GuiUtils.rainbowColor.get())
+                }
+            }, 0, 50)
 
+            // Combat
+
+            val Combatcontainer = UIContainer().constrain {
+                x = 0.pixels(alignOpposite = false)
+                y = 0.pixels(alignOpposite = false)
+                width = 1.pixels()
+                height = 1.pixels()
+            }.apply {
+                hide()  // Hide it so it dosent appear for 1 frame if it were outside
+            } childOf window
+            val CombatBase = UIRoundedRectangle(3f).constrain {
+                color = Color(0x1A191A).constraint
+                x = (358 / scalefactor).pixels(alignOpposite = false)
+                y = (50 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (412 / scalefactor).pixels()
+            } childOf Combatcontainer
+
+            val CombatTopBarRounded = UIRoundedRectangle(3f).constrain {
+                color = Color(0x141414).constraint
+                x = (358 / scalefactor).pixels(alignOpposite = false)
+                y = (50 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (47 / scalefactor).pixels()
+            } childOf Combatcontainer
+
+            val CombatBottomBarRounded = UIRoundedRectangle(3f).constrain {
+                color = Color(0x141414).constraint
+                x = (358 / scalefactor).pixels(alignOpposite = false)
+                y = (456 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (8 / scalefactor).pixels()
+            } childOf Combatcontainer
+
+            val CombatBottomBarUnRounded = UIRoundedRectangle(0f).constrain {
+                color = Color(0x141414).constraint
+                x = (358 / scalefactor).pixels(alignOpposite = false)
+                y = (454 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (6 / scalefactor).pixels()
+            } childOf Combatcontainer
+
+            val CombatArrowUp = UIImage.ofResource("/assets/tewxx/moduleuparrow.png").constrain {
+                x = (622/scalefactor).pixels(alignOpposite = false)
+                y = (71/scalefactor).pixels(alignOpposite = false)
+                width = (12 / scalefactor).pixels()
+                height = (5 / scalefactor).pixels()
+            } childOf Combatcontainer
+
+            val CombatModuleIcon = UIImage.ofResource("/assets/tewxx/combaticon.png").constrain {
+                x = (374/scalefactor).pixels(alignOpposite = false)
+                y = (62/scalefactor).pixels(alignOpposite = false)
+                width = (20 / scalefactor).pixels()
+                height = (22 / scalefactor).pixels()
+            } childOf Combatcontainer
+
+            val CombatModuleText = UIText("Combat").constrain {
+                textScale = 1.pixels()
+                x = (401/scalefactor).pixels(alignOpposite = false)
+                y = (63/scalefactor).pixels(alignOpposite = false)
+            } childOf Combatcontainer
+
+
+            // Blatant
+
+            val Blatantcontainer = UIContainer().constrain {
+                x = 0.pixels(alignOpposite = false)
+                y = 0.pixels(alignOpposite = false)
+                width = 1.pixels()
+                height = 1.pixels()
+            }.apply {
+                hide()  // Hide it so it dosent appear for 1 frame if it were outside
+            } childOf window
+            val BlatantBase = UIRoundedRectangle(3f).constrain {
+                color = Color(0x1A191A).constraint
+                x = (669 / scalefactor).pixels(alignOpposite = false)
+                y = (50 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (363 / scalefactor).pixels()
+            } childOf Blatantcontainer
+
+            val BlatantTopBarRounded = UIRoundedRectangle(3f).constrain {
+                color = Color(0x141414).constraint
+                x = (669 / scalefactor).pixels(alignOpposite = false)
+                y = (50 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (47 / scalefactor).pixels()
+            } childOf Blatantcontainer
+
+            val BlatantBottomBarRounded = UIRoundedRectangle(3f).constrain {
+                color = Color(0x141414).constraint
+                x = (669 / scalefactor).pixels(alignOpposite = false)
+                y = (409 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (8 / scalefactor).pixels()
+            } childOf Blatantcontainer
+
+            val BlatantBottomBarUnRounded = UIRoundedRectangle(0f).constrain {
+                color = Color(0x141414).constraint
+                x = (669 / scalefactor).pixels(alignOpposite = false)
+                y = (407 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (6 / scalefactor).pixels()
+            } childOf Blatantcontainer
+
+            val BlatantArrowUp = UIImage.ofResource("/assets/tewxx/moduleuparrow.png").constrain {
+                x = (933/scalefactor).pixels(alignOpposite = false)
+                y = (71/scalefactor).pixels(alignOpposite = false)
+                width = (12 / scalefactor).pixels()
+                height = (5 / scalefactor).pixels()
+            } childOf Blatantcontainer
+
+            val BlatantModuleIcon = UIImage.ofResource("/assets/tewxx/blatanticon.png").constrain {
+                x = (685/scalefactor).pixels(alignOpposite = false)
+                y = (62/scalefactor).pixels(alignOpposite = false)
+                width = (20 / scalefactor).pixels()
+                height = (20 / scalefactor).pixels()
+            } childOf Blatantcontainer
+
+            val BlatantModuleText = UIText("Blatant").constrain {
+                textScale = 1.pixels()
+                x = (712/scalefactor).pixels(alignOpposite = false)
+                y = (63/scalefactor).pixels(alignOpposite = false)
+            } childOf Blatantcontainer
+
+            // Render
+
+            val Rendercontainer = UIContainer().constrain {
+                x = 0.pixels(alignOpposite = false)
+                y = 0.pixels(alignOpposite = false)
+                width = 1.pixels()
+                height = 1.pixels()
+            }.apply {
+                hide()  // Hide it so it doesn't appear for 1 frame if it were outside
+            } childOf window
+
+            val RenderBase = UIRoundedRectangle(3f).constrain {
+                color = Color(0x1A191A).constraint
+                x = (980 / scalefactor).pixels(alignOpposite = false)
+                y = (50 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (363 / scalefactor).pixels()
+            } childOf Rendercontainer
+
+            val RenderTopBarRounded = UIRoundedRectangle(3f).constrain {
+                color = Color(0x141414).constraint
+                x = (980 / scalefactor).pixels(alignOpposite = false)
+                y = (50 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (47 / scalefactor).pixels()
+            } childOf Rendercontainer
+
+            val RenderBottomBarRounded = UIRoundedRectangle(3f).constrain {
+                color = Color(0x141414).constraint
+                x = (980 / scalefactor).pixels(alignOpposite = false)
+                y = (409 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (8 / scalefactor).pixels()
+            } childOf Rendercontainer
+
+            val RenderBottomBarUnRounded = UIRoundedRectangle(0f).constrain {
+                color = Color(0x141414).constraint
+                x = (980 / scalefactor).pixels(alignOpposite = false)
+                y = (407 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (6 / scalefactor).pixels()
+            } childOf Rendercontainer
+
+            val RenderArrowUp = UIImage.ofResource("/assets/tewxx/moduleuparrow.png").constrain {
+                x = (1244/scalefactor).pixels(alignOpposite = false)
+                y = (71/scalefactor).pixels(alignOpposite = false)
+                width = (12 / scalefactor).pixels()
+                height = (5 / scalefactor).pixels()
+            } childOf Rendercontainer
+
+            val RenderModuleIcon = UIImage.ofResource("/assets/tewxx/rendericon.png").constrain {
+                x = (996/scalefactor).pixels(alignOpposite = false)
+                y = (62/scalefactor).pixels(alignOpposite = false)
+                width = (20 / scalefactor).pixels()
+                height = (20 / scalefactor).pixels()
+            } childOf Rendercontainer
+
+            val RenderModuleText = UIText("Render").constrain {
+                textScale = 1.pixels()
+                x = (1023/scalefactor).pixels(alignOpposite = false)
+                y = (63/scalefactor).pixels(alignOpposite = false)
+            } childOf Rendercontainer
+
+            // Utility
+
+            val Utilitycontainer = UIContainer().constrain {
+                x = 0.pixels(alignOpposite = false)
+                y = 0.pixels(alignOpposite = false)
+                width = 1.pixels()
+                height = 1.pixels()
+            }.apply {
+                hide()  // Hide it so it doesn't appear for 1 frame if it were outside
+            } childOf window
+
+            val UtilityBase = UIRoundedRectangle(3f).constrain {
+                color = Color(0x1A191A).constraint
+                x = (1291 / scalefactor).pixels(alignOpposite = false)
+                y = (50 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (363 / scalefactor).pixels()
+            } childOf Utilitycontainer
+
+            val UtilityTopBarRounded = UIRoundedRectangle(3f).constrain {
+                color = Color(0x141414).constraint
+                x = (1291 / scalefactor).pixels(alignOpposite = false)
+                y = (50 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (47 / scalefactor).pixels()
+            } childOf Utilitycontainer
+
+            val UtilityBottomBarRounded = UIRoundedRectangle(3f).constrain {
+                color = Color(0x141414).constraint
+                x = (1291 / scalefactor).pixels(alignOpposite = false)
+                y = (409 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (8 / scalefactor).pixels()
+            } childOf Utilitycontainer
+
+            val UtilityBottomBarUnRounded = UIRoundedRectangle(0f).constrain {
+                color = Color(0x141414).constraint
+                x = (1291 / scalefactor).pixels(alignOpposite = false)
+                y = (407 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (6 / scalefactor).pixels()
+            } childOf Utilitycontainer
+
+            val UtilityArrowUp = UIImage.ofResource("/assets/tewxx/moduleuparrow.png").constrain {
+                x = (1555/scalefactor).pixels(alignOpposite = false)
+                y = (71/scalefactor).pixels(alignOpposite = false)
+                width = (12 / scalefactor).pixels()
+                height = (5 / scalefactor).pixels()
+            } childOf Utilitycontainer
+
+            val UtilityModuleIcon = UIImage.ofResource("/assets/tewxx/utilityicon.png").constrain {
+                x = (1307/scalefactor).pixels(alignOpposite = false)
+                y = (62/scalefactor).pixels(alignOpposite = false)
+                width = (20 / scalefactor).pixels()
+                height = (20 / scalefactor).pixels()
+            } childOf Utilitycontainer
+
+            val UtilityModuleText = UIText("Utility").constrain {
+                textScale = 1.pixels()
+                x = (1334/scalefactor).pixels(alignOpposite = false)
+                y = (63/scalefactor).pixels(alignOpposite = false)
+            } childOf Utilitycontainer
+
+            // World
+
+            val Worldcontainer = UIContainer().constrain {
+                x = 0.pixels(alignOpposite = false)
+                y = 0.pixels(alignOpposite = false)
+                width = 1.pixels()
+                height = 1.pixels()
+            }.apply {
+                hide()  // Hide it so it doesn't appear for 1 frame if it were outside
+            } childOf window
+
+            val WorldBase = UIRoundedRectangle(3f).constrain {
+                color = Color(0x1A191A).constraint
+                x = (1602 / scalefactor).pixels(alignOpposite = false)
+                y = (50 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (363 / scalefactor).pixels()
+            } childOf Worldcontainer
+
+            val WorldTopBarRounded = UIRoundedRectangle(3f).constrain {
+                color = Color(0x141414).constraint
+                x = (1602 / scalefactor).pixels(alignOpposite = false)
+                y = (50 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (47 / scalefactor).pixels()
+            } childOf Worldcontainer
+
+            val WorldBottomBarRounded = UIRoundedRectangle(3f).constrain {
+                color = Color(0x141414).constraint
+                x = (1602 / scalefactor).pixels(alignOpposite = false)
+                y = (409 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (8 / scalefactor).pixels()
+            } childOf Worldcontainer
+
+            val WorldBottomBarUnRounded = UIRoundedRectangle(0f).constrain {
+                color = Color(0x141414).constraint
+                x = (1602 / scalefactor).pixels(alignOpposite = false)
+                y = (407 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (6 / scalefactor).pixels()
+            } childOf Worldcontainer
+
+            val WorldArrowUp = UIImage.ofResource("/assets/tewxx/moduleuparrow.png").constrain {
+                x = (1866/scalefactor).pixels(alignOpposite = false)
+                y = (71/scalefactor).pixels(alignOpposite = false)
+                width = (12 / scalefactor).pixels()
+                height = (5 / scalefactor).pixels()
+            } childOf Worldcontainer
+
+            val WorldModuleIcon = UIImage.ofResource("/assets/tewxx/worldicon.png").constrain {
+                x = (1618/scalefactor).pixels(alignOpposite = false)
+                y = (62/scalefactor).pixels(alignOpposite = false)
+                width = (20 / scalefactor).pixels()
+                height = (20 / scalefactor).pixels()
+            } childOf Worldcontainer
+
+            val WorldModuleText = UIText("World").constrain {
+                textScale = 1.pixels()
+                x = (1645/scalefactor).pixels(alignOpposite = false)
+                y = (63/scalefactor).pixels(alignOpposite = false)
+            } childOf Worldcontainer
+
+            // Inventory
+
+            val Inventorycontainer = UIContainer().constrain {
+                x = 0.pixels(alignOpposite = false)
+                y = 0.pixels(alignOpposite = false)
+                width = 1.pixels()
+                height = 1.pixels()
+            }.apply {
+                hide()  // Hide it so it doesn't appear for 1 frame if it were outside
+            } childOf window
+
+            val InventoryBase = UIRoundedRectangle(3f).constrain {
+                color = Color(0x1A191A).constraint
+                x = (1913 / scalefactor).pixels(alignOpposite = false)
+                y = (50 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (363 / scalefactor).pixels()
+            } childOf Inventorycontainer
+
+            val InventoryTopBarRounded = UIRoundedRectangle(3f).constrain {
+                color = Color(0x141414).constraint
+                x = (1913 / scalefactor).pixels(alignOpposite = false)
+                y = (50 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (47 / scalefactor).pixels()
+            } childOf Inventorycontainer
+
+            val InventoryBottomBarRounded = UIRoundedRectangle(3f).constrain {
+                color = Color(0x141414).constraint
+                x = (1913 / scalefactor).pixels(alignOpposite = false)
+                y = (409 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (8 / scalefactor).pixels()
+            } childOf Inventorycontainer
+
+            val InventoryBottomBarUnRounded = UIRoundedRectangle(0f).constrain {
+                color = Color(0x141414).constraint
+                x = (1913 / scalefactor).pixels(alignOpposite = false)
+                y = (407 / scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (6 / scalefactor).pixels()
+            } childOf Inventorycontainer
+
+            val InventoryArrowUp = UIImage.ofResource("/assets/tewxx/moduleuparrow.png").constrain {
+                x = (2177/scalefactor).pixels(alignOpposite = false)
+                y = (71/scalefactor).pixels(alignOpposite = false)
+                width = (12 / scalefactor).pixels()
+                height = (5 / scalefactor).pixels()
+            } childOf Inventorycontainer
+
+            val InventoryModuleIcon = UIImage.ofResource("/assets/tewxx/inventoryicon.png").constrain {
+                x = (1929/scalefactor).pixels(alignOpposite = false)
+                y = (62/scalefactor).pixels(alignOpposite = false)
+                width = (20 / scalefactor).pixels()
+                height = (20 / scalefactor).pixels()
+            } childOf Inventorycontainer
+
+            val InventoryModuleText = UIText("Inventory").constrain {
+                textScale = 1.pixels()
+                x = (1956/scalefactor).pixels(alignOpposite = false)
+                y = (63/scalefactor).pixels(alignOpposite = false)
+            } childOf Inventorycontainer
+
+            // Home Click Detectors (These have to be at bottom)
+            //
             val HomeCombatClickArea = UIBlock().constrain {
                 color = Color(31, 30, 31, 0).constraint
                 x = (50 / scalefactor).pixels(alignOpposite = false)
@@ -344,7 +728,6 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 width = (290 / scalefactor).pixels()
                 height = (52 / scalefactor).pixels()
             } childOf window
-
             var combatIsTransparent = true
             var combatTimer: Timer? = null
             HomeCombatClickArea.onMouseClick {
@@ -356,7 +739,9 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     HomeCombatIcon.setColor(Color.WHITE)
                     combatTimer?.cancel()
                     combatTimer = null
+                    Combatcontainer.hide()
                 } else {
+                    Combatcontainer.unhide()
                     combatTimer = Timer().apply {
                         scheduleAtFixedRate(object : TimerTask() {
                             override fun run() {
@@ -367,7 +752,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     }
                 }
             }
-
+            //
             val HomeBlatantClickArea = UIBlock().constrain {
                 color = Color(31, 30, 31, 0).constraint
                 x = (50 / scalefactor).pixels(alignOpposite = false)
@@ -375,7 +760,6 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 width = (290 / scalefactor).pixels()
                 height = (52 / scalefactor).pixels()
             } childOf window
-
             var blatantIsTransparent = true
             var blatantTimer: Timer? = null
             HomeBlatantClickArea.onMouseClick {
@@ -387,7 +771,9 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     HomeBlatantIcon.setColor(Color.WHITE)
                     blatantTimer?.cancel()
                     blatantTimer = null
+                    Blatantcontainer.hide()
                 } else {
+                    Blatantcontainer.unhide()
                     blatantTimer = Timer().apply {
                         scheduleAtFixedRate(object : TimerTask() {
                             override fun run() {
@@ -398,7 +784,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     }
                 }
             }
-
+            //
             val HomeRenderClickArea = UIBlock().constrain {
                 color = Color(31, 30, 31, 0).constraint
                 x = (50 / scalefactor).pixels(alignOpposite = false)
@@ -406,7 +792,6 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 width = (290 / scalefactor).pixels()
                 height = (52 / scalefactor).pixels()
             } childOf window
-
             var renderIsTransparent = true
             var renderTimer: Timer? = null
             HomeRenderClickArea.onMouseClick {
@@ -418,7 +803,9 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     HomeRenderIcon.setColor(Color.WHITE)
                     renderTimer?.cancel()
                     renderTimer = null
+                    Rendercontainer.hide()
                 } else {
+                    Rendercontainer.unhide()
                     renderTimer = Timer().apply {
                         scheduleAtFixedRate(object : TimerTask() {
                             override fun run() {
@@ -429,7 +816,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     }
                 }
             }
-
+            //
             val HomeUtilityClickArea = UIBlock().constrain {
                 color = Color(31, 30, 31, 0).constraint
                 x = (50 / scalefactor).pixels(alignOpposite = false)
@@ -437,7 +824,6 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 width = (290 / scalefactor).pixels()
                 height = (52 / scalefactor).pixels()
             } childOf window
-
             var utilityIsTransparent = true
             var utilityTimer: Timer? = null
             HomeUtilityClickArea.onMouseClick {
@@ -449,7 +835,9 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     HomeUtilityIcon.setColor(Color.WHITE)
                     utilityTimer?.cancel()
                     utilityTimer = null
+                    Utilitycontainer.hide()
                 } else {
+                    Utilitycontainer.unhide()
                     utilityTimer = Timer().apply {
                         scheduleAtFixedRate(object : TimerTask() {
                             override fun run() {
@@ -460,7 +848,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     }
                 }
             }
-
+            //
             val HomeWorldClickArea = UIBlock().constrain {
                 color = Color(31, 30, 31, 0).constraint
                 x = (50 / scalefactor).pixels(alignOpposite = false)
@@ -468,7 +856,6 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 width = (290 / scalefactor).pixels()
                 height = (52 / scalefactor).pixels()
             } childOf window
-
             var worldIsTransparent = true
             var worldTimer: Timer? = null
             HomeWorldClickArea.onMouseClick {
@@ -480,7 +867,9 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     HomeWorldIcon.setColor(Color.WHITE)
                     worldTimer?.cancel()
                     worldTimer = null
+                    Worldcontainer.hide()
                 } else {
+                    Worldcontainer.unhide()
                     worldTimer = Timer().apply {
                         scheduleAtFixedRate(object : TimerTask() {
                             override fun run() {
@@ -491,7 +880,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     }
                 }
             }
-
+            //
             val HomeInventoryClickArea = UIBlock().constrain {
                 color = Color(31, 30, 31, 0).constraint
                 x = (50 / scalefactor).pixels(alignOpposite = false)
@@ -499,7 +888,6 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 width = (290 / scalefactor).pixels()
                 height = (52 / scalefactor).pixels()
             } childOf window
-
             var inventoryIsTransparent = true
             var inventoryTimer: Timer? = null
             HomeInventoryClickArea.onMouseClick {
@@ -511,7 +899,9 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     HomeInventoryIcon.setColor(Color.WHITE)
                     inventoryTimer?.cancel()
                     inventoryTimer = null
+                    Inventorycontainer.hide()
                 } else {
+                    Inventorycontainer.unhide()
                     inventoryTimer = Timer().apply {
                         scheduleAtFixedRate(object : TimerTask() {
                             override fun run() {
@@ -523,11 +913,5 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 }
             }
 
-            // RGB
-            Timer().scheduleAtFixedRate(object : TimerTask() {
-                override fun run() {
-                    HomeV4Image.setColor(GuiUtils.rainbowColor.get())
-                }
-            }, 0, 50)
         }
 }

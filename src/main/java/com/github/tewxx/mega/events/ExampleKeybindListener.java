@@ -21,15 +21,10 @@ public class ExampleKeybindListener {
     public ExampleKeybindListener() {
         ClientRegistry.registerKeyBinding(exampleKeybind);
     }
-
     @SubscribeEvent
     public void onKeyPress(InputEvent.KeyInputEvent event) {
-        // this method runs everytime a key on the keyboard is pressed / unpressed
-
         if (exampleKeybind.isPressed()) {
-            // Open GUI
             GuiUtil.open(new GUI());
-            //Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Showing Color Selection GUI"));
         }
     }
 }

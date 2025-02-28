@@ -20,6 +20,6 @@ object GuiUtils {
                     rainbowColor.set(Color(255, 0, 0))
                 }
             }
-        }, 0, 50) // Adjust the period for smoother transition
+        }, 0, 50)
     }
 }

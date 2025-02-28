@@ -361,7 +361,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             } childOf Combatcontainer
 
             val CombatTopBarRounded = UIRoundedRectangle(3f).constrain {
-                color = Color(0x141414).constraint
+                color = Color(20,20,20,0).constraint
                 x = (358 / scalefactor).pixels(alignOpposite = false)
                 y = (50 / scalefactor).pixels(alignOpposite = false)
                 width = (290 / scalefactor).pixels()
@@ -416,7 +416,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 hide()  // Hide it so it dosent appear for 1 frame if it were outside
             } childOf window
             val BlatantBase = UIRoundedRectangle(3f).constrain {
-                color = Color(0x1A191A).constraint
+                color = Color(0x1a1a1a).constraint
                 x = (669 / scalefactor).pixels(alignOpposite = false)
                 y = (50 / scalefactor).pixels(alignOpposite = false)
                 width = (290 / scalefactor).pixels()
@@ -424,7 +424,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             } childOf Blatantcontainer
 
             val BlatantTopBarRounded = UIRoundedRectangle(3f).constrain {
-                color = Color(0x141414).constraint
+                color = Color(20,20,20,0).constraint
                 x = (669 / scalefactor).pixels(alignOpposite = false)
                 y = (50 / scalefactor).pixels(alignOpposite = false)
                 width = (290 / scalefactor).pixels()
@@ -487,7 +487,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             } childOf Rendercontainer
 
             val RenderTopBarRounded = UIRoundedRectangle(3f).constrain {
-                color = Color(0x141414).constraint
+                color = Color(20,20,20,0).constraint
                 x = (980 / scalefactor).pixels(alignOpposite = false)
                 y = (50 / scalefactor).pixels(alignOpposite = false)
                 width = (290 / scalefactor).pixels()
@@ -550,7 +550,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             } childOf Utilitycontainer
 
             val UtilityTopBarRounded = UIRoundedRectangle(3f).constrain {
-                color = Color(0x141414).constraint
+                color = Color(20,20,20,0).constraint
                 x = (1291 / scalefactor).pixels(alignOpposite = false)
                 y = (50 / scalefactor).pixels(alignOpposite = false)
                 width = (290 / scalefactor).pixels()
@@ -613,7 +613,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             } childOf Worldcontainer
 
             val WorldTopBarRounded = UIRoundedRectangle(3f).constrain {
-                color = Color(0x141414).constraint
+                color = Color(20,20,20,0).constraint
                 x = (1602 / scalefactor).pixels(alignOpposite = false)
                 y = (50 / scalefactor).pixels(alignOpposite = false)
                 width = (290 / scalefactor).pixels()
@@ -676,7 +676,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             } childOf Inventorycontainer
 
             val InventoryTopBarRounded = UIRoundedRectangle(3f).constrain {
-                color = Color(0x141414).constraint
+                color = Color(20,20,20,0).constraint
                 x = (1913 / scalefactor).pixels(alignOpposite = false)
                 y = (50 / scalefactor).pixels(alignOpposite = false)
                 width = (290 / scalefactor).pixels()

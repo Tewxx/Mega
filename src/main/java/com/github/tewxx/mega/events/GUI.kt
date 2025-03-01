@@ -36,7 +36,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
 
         init {
             // Main Elementa Stuff
-            Inspector(window) childOf window
+            //Inspector(window) childOf window
             val scalefactor = 2.5;
             //Home
 
@@ -400,15 +400,16 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
 
             val CombatModuleIcon = UIImage.ofResource("/assets/home/images/combaticon.png").constrain {
                 x = (374/scalefactor).pixels(alignOpposite = false)
-                y = (62/scalefactor).pixels(alignOpposite = false)
-                width = (20 / scalefactor).pixels()
-                height = (22 / scalefactor).pixels()
+                y = (65/scalefactor).pixels(alignOpposite = false)
+                width = (19 / scalefactor).pixels()
+                height = (20 / scalefactor).pixels()
             } childOf Combatcontainer
 
-            val CombatModuleText = UIText("Combat").constrain {
-                textScale = 1.pixels()
-                x = (401/scalefactor).pixels(alignOpposite = false)
-                y = (63/scalefactor).pixels(alignOpposite = false)
+            val CombatModuleText = UIImage.ofResource("/assets/combat/text/CombatText.png").constrain {
+                x = (400/scalefactor).pixels(alignOpposite = false)
+                y = (68/scalefactor).pixels(alignOpposite = false)
+                width = (64 / scalefactor).pixels()
+                height = (13 / scalefactor).pixels()
             } childOf Combatcontainer
 
 
@@ -463,15 +464,16 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
 
             val BlatantModuleIcon = UIImage.ofResource("/assets/home/images/blatanticon.png").constrain {
                 x = (685/scalefactor).pixels(alignOpposite = false)
-                y = (62/scalefactor).pixels(alignOpposite = false)
+                y = (65/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
                 height = (20 / scalefactor).pixels()
             } childOf Blatantcontainer
 
-            val BlatantModuleText = UIText("Blatant").constrain {
-                textScale = 1.pixels()
-                x = (712/scalefactor).pixels(alignOpposite = false)
-                y = (63/scalefactor).pixels(alignOpposite = false)
+            val BlatantModuleText = UIImage.ofResource("/assets/blatant/text/BlatantText.png").constrain {
+                x = (713/scalefactor).pixels(alignOpposite = false)
+                y = (68/scalefactor).pixels(alignOpposite = false)
+                width = (55 / scalefactor).pixels()
+                height = (13 / scalefactor).pixels()
             } childOf Blatantcontainer
 
             // Render
@@ -531,10 +533,11 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 height = (20 / scalefactor).pixels()
             } childOf Rendercontainer
 
-            val RenderModuleText = UIText("Render").constrain {
-                textScale = 1.pixels()
-                x = (1023/scalefactor).pixels(alignOpposite = false)
-                y = (63/scalefactor).pixels(alignOpposite = false)
+            val RenderModuleText = UIImage.ofResource("/assets/render/text/RenderText.png").constrain {
+                x = (1022/scalefactor).pixels(alignOpposite = false)
+                y = (68/scalefactor).pixels(alignOpposite = false)
+                width = (57 / scalefactor).pixels()
+                height = (13 / scalefactor).pixels()
             } childOf Rendercontainer
 
             // Utility
@@ -594,10 +597,11 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 height = (20 / scalefactor).pixels()
             } childOf Utilitycontainer
 
-            val UtilityModuleText = UIText("Utility").constrain {
-                textScale = 1.pixels()
-                x = (1334/scalefactor).pixels(alignOpposite = false)
-                y = (63/scalefactor).pixels(alignOpposite = false)
+            val UtilityModuleText = UIImage.ofResource("/assets/utility/text/UtilityText.png").constrain {
+                x = (1339/scalefactor).pixels(alignOpposite = false)
+                y = (67/scalefactor).pixels(alignOpposite = false)
+                width = (43 / scalefactor).pixels()
+                height = (16 / scalefactor).pixels()
             } childOf Utilitycontainer
 
             // World
@@ -651,16 +655,17 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             } childOf Worldcontainer
 
             val WorldModuleIcon = UIImage.ofResource("/assets/home/images/worldicon.png").constrain {
-                x = (1618/scalefactor).pixels(alignOpposite = false)
-                y = (62/scalefactor).pixels(alignOpposite = false)
+                x = (1611/scalefactor).pixels(alignOpposite = false)
+                y = (65/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
                 height = (20 / scalefactor).pixels()
             } childOf Worldcontainer
 
-            val WorldModuleText = UIText("World").constrain {
-                textScale = 1.pixels()
-                x = (1645/scalefactor).pixels(alignOpposite = false)
-                y = (63/scalefactor).pixels(alignOpposite = false)
+            val WorldModuleText = UIImage.ofResource("/assets/world/text/WorldText.png").constrain {
+                x = (1640/scalefactor).pixels(alignOpposite = false)
+                y = (69/scalefactor).pixels(alignOpposite = false)
+                width = (45 / scalefactor).pixels()
+                height = (13 / scalefactor).pixels()
             } childOf Worldcontainer
 
             // Inventory
@@ -714,17 +719,19 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             } childOf Inventorycontainer
 
             val InventoryModuleIcon = UIImage.ofResource("/assets/home/images/inventoryicon.png").constrain {
-                x = (1929/scalefactor).pixels(alignOpposite = false)
-                y = (62/scalefactor).pixels(alignOpposite = false)
+                x = (1928/scalefactor).pixels(alignOpposite = false)
+                y = (65/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
                 height = (20 / scalefactor).pixels()
             } childOf Inventorycontainer
 
-            val InventoryModuleText = UIText("Inventory").constrain {
-                textScale = 1.pixels()
+            val InventoryModuleText = UIImage.ofResource("/assets/inventory/text/InventoryText.png").constrain {
                 x = (1956/scalefactor).pixels(alignOpposite = false)
-                y = (63/scalefactor).pixels(alignOpposite = false)
+                y = (68/scalefactor).pixels(alignOpposite = false)
+                width = (74 / scalefactor).pixels()
+                height = (16 / scalefactor).pixels()
             } childOf Inventorycontainer
+
 
             // Home Click Detectors (These have to be at bottom)
             //

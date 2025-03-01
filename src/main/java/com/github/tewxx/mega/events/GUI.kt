@@ -1,15 +1,13 @@
 package com.github.tewxx.mega.events
 
 import GuiUtils
-import gg.essential.api.utils.GuiUtil
 import gg.essential.elementa.ElementaVersion
+import gg.essential.elementa.UIComponent
 import gg.essential.elementa.WindowScreen
 import gg.essential.elementa.components.*
-import gg.essential.elementa.constraints.ChildBasedMaxSizeConstraint
-import gg.essential.elementa.constraints.ChildBasedSizeConstraint
-import gg.essential.elementa.constraints.SiblingConstraint
+import gg.essential.elementa.components.inspector.Inspector
+import gg.essential.elementa.constraints.animation.Animations
 import gg.essential.elementa.dsl.*
-import gg.essential.elementa.effects.OutlineEffect
 import gg.essential.universal.UMatrixStack
 import java.awt.Color
 import java.util.*
@@ -32,9 +30,13 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
         super.onScreenClose()
     }
 
+    fun setupDraggableComponent(component: UIComponent) {
+        DraggableClass.makeComponentDraggable(component)
+    }
+
         init {
             // Main Elementa Stuff
-            //Inspector(window) childOf window
+            Inspector(window) childOf window
             val scalefactor = 2.5;
             //Home
 
@@ -43,7 +45,7 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 x = (50/scalefactor).pixels(alignOpposite = false)
                 y = (50/scalefactor).pixels(alignOpposite = false)
                 width = (290 / scalefactor).pixels()
-                height = (582 / scalefactor).pixels()
+                height = (510 / scalefactor).pixels()
             } childOf window
 
             val HomeTopBarUNRounded = UIBlock().constrain {
@@ -73,26 +75,34 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             val HomeBottomRounded = UIRoundedRectangle(3f).constrain {
                 color = Color(0x141414).constraint
                 x = (50/scalefactor).pixels(alignOpposite = false)
-                y = (600/scalefactor).pixels(alignOpposite = false)
+                y = (546/scalefactor).pixels(alignOpposite = false)
                 width = (290 / scalefactor).pixels()
                 height = (32 / scalefactor).pixels()
             } childOf window
 
-            val HomeVapeImage = UIImage.ofResource("/assets/tewxx/logo.png").constrain {
-            x = (59/scalefactor).pixels(alignOpposite = false)
-                y = (62/scalefactor).pixels(alignOpposite = false)
-                width = (82 / scalefactor).pixels()
-                height = (22 / scalefactor).pixels()
+            val HomeBottomUnRounded = UIRoundedRectangle(0f).constrain {
+                color = Color(0x141414).constraint
+                x = (50/scalefactor).pixels(alignOpposite = false)
+                y = (546/scalefactor).pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (17 / scalefactor).pixels()
             } childOf window
 
-            val HomeV4Image = UIImage.ofResource("/assets/tewxx/v4.png").constrain {
-                x = (141/scalefactor).pixels(alignOpposite = false)
-                y = (62/scalefactor).pixels(alignOpposite = false)
-                width = (33 / scalefactor).pixels()
-                height = (19 / scalefactor).pixels()
+            val HomeVapeImage = UIImage.ofResource("/assets/home/images/logo.png").constrain {
+                x = (62/scalefactor).pixels(alignOpposite = false)
+                y = (64/scalefactor).pixels(alignOpposite = false)
+                width = (77 / scalefactor).pixels()
+                height = (20 / scalefactor).pixels()
             } childOf window
 
-            val HomeSettingsImage = UIImage.ofResource("/assets/tewxx/settings.png").constrain {
+            val HomeV4Image = UIImage.ofResource("/assets/home/images/v4.png").constrain {
+                x = (140/scalefactor).pixels(alignOpposite = false)
+                y = (64/scalefactor).pixels(alignOpposite = false)
+                width = (29 / scalefactor).pixels()
+                height = (17 / scalefactor).pixels()
+            } childOf window
+
+            val HomeSettingsImage = UIImage.ofResource("/assets/home/images/settings.png").constrain {
                 color = Color(255,255,255,100).constraint // Makes it half transparent
                 x = (306/scalefactor).pixels(alignOpposite = false)
                 y = (62/scalefactor).pixels(alignOpposite = false)
@@ -152,111 +162,115 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
 
             // Home - Left icons
 
-            val HomeCombatIcon = UIImage.ofResource("/assets/tewxx/combaticon.png").constrain {
-                x = (67/scalefactor).pixels(alignOpposite = false)
-                y = (112/scalefactor).pixels(alignOpposite = false)
+            val HomeCombatIcon = UIImage.ofResource("/assets/home/images/combaticon.png").constrain {
+                x = (68/scalefactor).pixels(alignOpposite = false)
+                y = (113/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
                 height = (22 / scalefactor).pixels()
             } childOf window
 
-            val HomeBlatantIcon = UIImage.ofResource("/assets/tewxx/blatanticon.png").constrain {
+            val HomeBlatantIcon = UIImage.ofResource("/assets/home/images/blatanticon.png").constrain {
                 x = (67/scalefactor).pixels(alignOpposite = false)
                 y = (165/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
                 height = (20 / scalefactor).pixels()
             } childOf window
 
-            val HomeRenderIcon = UIImage.ofResource("/assets/tewxx/rendericon.png").constrain {
-                x = (67/scalefactor).pixels(alignOpposite = false)
-                y = (216/scalefactor).pixels(alignOpposite = false)
+            val HomeRenderIcon = UIImage.ofResource("/assets/home/images/rendericon.png").constrain {
+                x = (68/scalefactor).pixels(alignOpposite = false)
+                y = (217/scalefactor).pixels(alignOpposite = false)
+                width = (21 / scalefactor).pixels()
+                height = (20 / scalefactor).pixels()
+            } childOf window
+
+            val HomeUtilityIcon = UIImage.ofResource("/assets/home/images/utilityicon.png").constrain {
+                x = (68/scalefactor).pixels(alignOpposite = false)
+                y = (269/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
                 height = (19 / scalefactor).pixels()
             } childOf window
 
-            val HomeUtilityIcon = UIImage.ofResource("/assets/tewxx/utilityicon.png").constrain {
-                x = (67/scalefactor).pixels(alignOpposite = false)
-                y = (270/scalefactor).pixels(alignOpposite = false)
-                width = (19 / scalefactor).pixels()
-                height = (18 / scalefactor).pixels()
-            } childOf window
-
-            val HomeWorldIcon = UIImage.ofResource("/assets/tewxx/worldicon.png").constrain {
-                x = (67/scalefactor).pixels(alignOpposite = false)
+            val HomeWorldIcon = UIImage.ofResource("/assets/home/images/worldicon.png").constrain {
+                x = (68/scalefactor).pixels(alignOpposite = false)
                 y = (321/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
                 height = (20 / scalefactor).pixels()
             } childOf window
 
-            val HomeInventoryIcon = UIImage.ofResource("/assets/tewxx/inventoryicon.png").constrain {
-                x = (67/scalefactor).pixels(alignOpposite = false)
-                y = (374/scalefactor).pixels(alignOpposite = false)
+            val HomeInventoryIcon = UIImage.ofResource("/assets/home/images/inventoryicon.png").constrain {
+                x = (68/scalefactor).pixels(alignOpposite = false)
+                y = (373/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
                 height = (19 / scalefactor).pixels()
             } childOf window
 
             // Home - text
 
-            val CombatText = UIText("Combat").constrain {
-                textScale = 1.pixels()
-                x = (97/scalefactor).pixels(alignOpposite = false)
-                y = (112/scalefactor).pixels(alignOpposite = false)
+            val CombatText = UIImage.ofResource("/assets/home/text/CombatText.png").constrain {
+                x = (94/scalefactor).pixels(alignOpposite = false)
+                y = (116/scalefactor).pixels(alignOpposite = false)
+                width = (70 / scalefactor).pixels()
+                height = (15 / scalefactor).pixels()
             } childOf window
 
-            val BlatantText = UIText("Blatant").constrain {
-                textScale = 1.pixels()
-                x = (97/scalefactor).pixels(alignOpposite = false)
-                y = (165/scalefactor).pixels(alignOpposite = false)
+
+            val BlatantText = UIImage.ofResource("/assets/home/text/BlatantText.png").constrain {
+                x = (95/scalefactor).pixels(alignOpposite = false)
+                y = (167/scalefactor).pixels(alignOpposite = false)
+                width = (63 / scalefactor).pixels()
+                height = (15 / scalefactor).pixels()
             } childOf window
 
-            val RenderText = UIText("Render").constrain {
-                textScale = 1.pixels()
-                x = (97/scalefactor).pixels(alignOpposite = false)
-                y = (216/scalefactor).pixels(alignOpposite = false)
+            val RenderText = UIImage.ofResource("/assets/home/text/RenderText.png").constrain {
+                x = (94/scalefactor).pixels(alignOpposite = false)
+                y = (220/scalefactor).pixels(alignOpposite = false)
+                width = (67 / scalefactor).pixels()
+                height = (15 / scalefactor).pixels()
             } childOf window
 
-            val UtilityText = UIText("Utility").constrain {
-                textScale = 1.pixels()
-                x = (97/scalefactor).pixels(alignOpposite = false)
-                y = (270/scalefactor).pixels(alignOpposite = false)
+            val UtilityText = UIImage.ofResource("/assets/home/text/UtilityText.png").constrain {
+                x = (95/scalefactor).pixels(alignOpposite = false)
+                y = (269/scalefactor).pixels(alignOpposite = false)
+                width = (52 / scalefactor).pixels()
+                height = (19 / scalefactor).pixels()
             } childOf window
 
-            val WorldText = UIText("World").constrain {
-                textScale = 1.pixels()
-                x = (97/scalefactor).pixels(alignOpposite = false)
-                y = (321/scalefactor).pixels(alignOpposite = false)
+            val WorldText = UIImage.ofResource("/assets/home/text/WorldText.png").constrain {
+                x = (95/scalefactor).pixels(alignOpposite = false)
+                y = (323/scalefactor).pixels(alignOpposite = false)
+                width = (54 / scalefactor).pixels()
+                height = (15 / scalefactor).pixels()
             } childOf window
 
-            val InventoryText = UIText("Inventory").constrain {
-                textScale = 1.pixels()
-                x = (97/scalefactor).pixels(alignOpposite = false)
+            val InventoryText = UIImage.ofResource("/assets/home/text/InventoryText.png").constrain {
+                x = (96/scalefactor).pixels(alignOpposite = false)
                 y = (374/scalefactor).pixels(alignOpposite = false)
+                width = (84 / scalefactor).pixels()
+                height = (18 / scalefactor).pixels()
             } childOf window
 
-            UIText("Misc").constrain {
-                textScale = 0.95.pixels()
-                x = (60 / scalefactor).pixels(alignOpposite = false)
-                y = (415 / scalefactor).pixels(alignOpposite = false)
+            val MiscText = UIImage.ofResource("/assets/home/text/MISCText.png").constrain {
+                x = (67/scalefactor).pixels(alignOpposite = false)
+                y = (419/scalefactor).pixels(alignOpposite = false)
+                width = (34 / scalefactor).pixels()
+                height = (11 / scalefactor).pixels()
             } childOf window
 
-            UIText("Friends").constrain {
-                textScale = 0.95.pixels()
-                x = (60 / scalefactor).pixels(alignOpposite = false)
-                y = (458 / scalefactor).pixels(alignOpposite = false)
+            val FriendsText = UIImage.ofResource("/assets/home/text/FriendsText.png").constrain {
+                x = (70/scalefactor).pixels(alignOpposite = false)
+                y = (462/scalefactor).pixels(alignOpposite = false)
+                width = (59 / scalefactor).pixels()
+                height = (13 / scalefactor).pixels()
             } childOf window
 
-            UIText("Profiles").constrain {
-                textScale = 0.95.pixels()
-                x = (60 / scalefactor).pixels(alignOpposite = false)
-                y = (508 / scalefactor).pixels(alignOpposite = false)
+            val ProfilesText = UIImage.ofResource("/assets/home/text/ProfilesText.png").constrain {
+                x = (70/scalefactor).pixels(alignOpposite = false)
+                y = (513/scalefactor).pixels(alignOpposite = false)
+                width = (58 / scalefactor).pixels()
+                height = (13 / scalefactor).pixels()
             } childOf window
 
-            UIText("Macros").constrain {
-                textScale = 0.95.pixels()
-                x = (60 / scalefactor).pixels(alignOpposite = false)
-                y = (558 / scalefactor).pixels(alignOpposite = false)
-            } childOf window
-
-            UIText("Recreated by Mega").constrain {
+            /*UIText("Recreated by Mega").constrain {
                 color = Color(255,255,255,100).constraint // Makes it half transparent
                 textScale = 0.50.pixels()
                 x = (60 / scalefactor).pixels(alignOpposite = false)
@@ -268,69 +282,62 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 textScale = 0.50.pixels()
                 x = (275 / scalefactor).pixels(alignOpposite = false)
                 y = (612 / scalefactor).pixels(alignOpposite = false)
-            } childOf window
+            } childOf window*/
 
             // Home - arrows
 
-            val ArrowCombat = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
-                x = (233/scalefactor).pixels(alignOpposite = false)
+            val ArrowCombat = UIImage.ofResource("/assets/home/images/arrowhome.png").constrain {
+                x = (221/scalefactor).pixels(alignOpposite = false)
                 y = (73/scalefactor).pixels(alignOpposite = false)
                 width = (100 / scalefactor).pixels()
                 height = (100 / scalefactor).pixels()
             } childOf window
 
-            val ArrowBlatant = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
-                x = (233/scalefactor).pixels(alignOpposite = false)
+            val ArrowBlatant = UIImage.ofResource("/assets/home/images/arrowhome.png").constrain {
+                x = (221/scalefactor).pixels(alignOpposite = false)
                 y = (125/scalefactor).pixels(alignOpposite = false)
                 width = (100 / scalefactor).pixels()
                 height = (100 / scalefactor).pixels()
             } childOf window
 
-            val ArrowRender = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
-                x = (233/scalefactor).pixels(alignOpposite = false)
+            val ArrowRender = UIImage.ofResource("/assets/home/images/arrowhome.png").constrain {
+                x = (221/scalefactor).pixels(alignOpposite = false)
                 y = (175/scalefactor).pixels(alignOpposite = false)
                 width = (100 / scalefactor).pixels()
                 height = (100 / scalefactor).pixels()
             } childOf window
 
-            val ArrowUtility = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
-                x = (233/scalefactor).pixels(alignOpposite = false)
+            val ArrowUtility = UIImage.ofResource("/assets/home/images/arrowhome.png").constrain {
+                x = (221/scalefactor).pixels(alignOpposite = false)
                 y = (229/scalefactor).pixels(alignOpposite = false)
                 width = (100 / scalefactor).pixels()
                 height = (100 / scalefactor).pixels()
             } childOf window
 
-            val ArrowWorld = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
-                x = (233/scalefactor).pixels(alignOpposite = false)
+            val ArrowWorld = UIImage.ofResource("/assets/home/images/arrowhome.png").constrain {
+                x = (221/scalefactor).pixels(alignOpposite = false)
                 y = (281/scalefactor).pixels(alignOpposite = false)
                 width = (100 / scalefactor).pixels()
                 height = (100 / scalefactor).pixels()
             } childOf window
 
-            val ArrowInventory = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
-                x = (233/scalefactor).pixels(alignOpposite = false)
+            val ArrowInventory = UIImage.ofResource("/assets/home/images/arrowhome.png").constrain {
+                x = (221/scalefactor).pixels(alignOpposite = false)
                 y = (333/scalefactor).pixels(alignOpposite = false)
                 width = (100 / scalefactor).pixels()
                 height = (100 / scalefactor).pixels()
             } childOf window
 
-            val ArrowFriends = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
-                x = (233/scalefactor).pixels(alignOpposite = false)
-                y = (418/scalefactor).pixels(alignOpposite = false)
+            val ArrowFriends = UIImage.ofResource("/assets/home/images/arrowhome.png").constrain {
+                x = (221/scalefactor).pixels(alignOpposite = false)
+                y = (420/scalefactor).pixels(alignOpposite = false)
                 width = (100 / scalefactor).pixels()
                 height = (100 / scalefactor).pixels()
             } childOf window
 
-            val ArrowProfiles = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
-                x = (233/scalefactor).pixels(alignOpposite = false)
-                y = (468/scalefactor).pixels(alignOpposite = false)
-                width = (100 / scalefactor).pixels()
-                height = (100 / scalefactor).pixels()
-            } childOf window
-
-            val ArrowMacros = UIImage.ofResource("/assets/tewxx/arrowhome.png").constrain {
-                x = (233/scalefactor).pixels(alignOpposite = false)
-                y = (522/scalefactor).pixels(alignOpposite = false)
+            val ArrowProfiles = UIImage.ofResource("/assets/home/images/arrowhome.png").constrain {
+                x = (221/scalefactor).pixels(alignOpposite = false)
+                y = (470/scalefactor).pixels(alignOpposite = false)
                 width = (100 / scalefactor).pixels()
                 height = (100 / scalefactor).pixels()
             } childOf window
@@ -384,14 +391,14 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 height = (6 / scalefactor).pixels()
             } childOf Combatcontainer
 
-            val CombatArrowUp = UIImage.ofResource("/assets/tewxx/moduleuparrow.png").constrain {
+            val CombatArrowUp = UIImage.ofResource("/assets/moduleuparrow.png").constrain {
                 x = (622/scalefactor).pixels(alignOpposite = false)
                 y = (71/scalefactor).pixels(alignOpposite = false)
                 width = (12 / scalefactor).pixels()
                 height = (5 / scalefactor).pixels()
             } childOf Combatcontainer
 
-            val CombatModuleIcon = UIImage.ofResource("/assets/tewxx/combaticon.png").constrain {
+            val CombatModuleIcon = UIImage.ofResource("/assets/home/images/combaticon.png").constrain {
                 x = (374/scalefactor).pixels(alignOpposite = false)
                 y = (62/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
@@ -447,14 +454,14 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 height = (6 / scalefactor).pixels()
             } childOf Blatantcontainer
 
-            val BlatantArrowUp = UIImage.ofResource("/assets/tewxx/moduleuparrow.png").constrain {
+            val BlatantArrowUp = UIImage.ofResource("/assets/moduleuparrow.png").constrain {
                 x = (933/scalefactor).pixels(alignOpposite = false)
                 y = (71/scalefactor).pixels(alignOpposite = false)
                 width = (12 / scalefactor).pixels()
                 height = (5 / scalefactor).pixels()
             } childOf Blatantcontainer
 
-            val BlatantModuleIcon = UIImage.ofResource("/assets/tewxx/blatanticon.png").constrain {
+            val BlatantModuleIcon = UIImage.ofResource("/assets/home/images/blatanticon.png").constrain {
                 x = (685/scalefactor).pixels(alignOpposite = false)
                 y = (62/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
@@ -510,14 +517,14 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 height = (6 / scalefactor).pixels()
             } childOf Rendercontainer
 
-            val RenderArrowUp = UIImage.ofResource("/assets/tewxx/moduleuparrow.png").constrain {
+            val RenderArrowUp = UIImage.ofResource("/assets/moduleuparrow.png").constrain {
                 x = (1244/scalefactor).pixels(alignOpposite = false)
                 y = (71/scalefactor).pixels(alignOpposite = false)
                 width = (12 / scalefactor).pixels()
                 height = (5 / scalefactor).pixels()
             } childOf Rendercontainer
 
-            val RenderModuleIcon = UIImage.ofResource("/assets/tewxx/rendericon.png").constrain {
+            val RenderModuleIcon = UIImage.ofResource("/assets/home/images/rendericon.png").constrain {
                 x = (996/scalefactor).pixels(alignOpposite = false)
                 y = (62/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
@@ -573,14 +580,14 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 height = (6 / scalefactor).pixels()
             } childOf Utilitycontainer
 
-            val UtilityArrowUp = UIImage.ofResource("/assets/tewxx/moduleuparrow.png").constrain {
+            val UtilityArrowUp = UIImage.ofResource("/assets/moduleuparrow.png").constrain {
                 x = (1555/scalefactor).pixels(alignOpposite = false)
                 y = (71/scalefactor).pixels(alignOpposite = false)
                 width = (12 / scalefactor).pixels()
                 height = (5 / scalefactor).pixels()
             } childOf Utilitycontainer
 
-            val UtilityModuleIcon = UIImage.ofResource("/assets/tewxx/utilityicon.png").constrain {
+            val UtilityModuleIcon = UIImage.ofResource("/assets/home/images/utilityicon.png").constrain {
                 x = (1307/scalefactor).pixels(alignOpposite = false)
                 y = (62/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
@@ -636,14 +643,14 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 height = (6 / scalefactor).pixels()
             } childOf Worldcontainer
 
-            val WorldArrowUp = UIImage.ofResource("/assets/tewxx/moduleuparrow.png").constrain {
+            val WorldArrowUp = UIImage.ofResource("/assets/moduleuparrow.png").constrain {
                 x = (1866/scalefactor).pixels(alignOpposite = false)
                 y = (71/scalefactor).pixels(alignOpposite = false)
                 width = (12 / scalefactor).pixels()
                 height = (5 / scalefactor).pixels()
             } childOf Worldcontainer
 
-            val WorldModuleIcon = UIImage.ofResource("/assets/tewxx/worldicon.png").constrain {
+            val WorldModuleIcon = UIImage.ofResource("/assets/home/images/worldicon.png").constrain {
                 x = (1618/scalefactor).pixels(alignOpposite = false)
                 y = (62/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
@@ -699,14 +706,14 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 height = (6 / scalefactor).pixels()
             } childOf Inventorycontainer
 
-            val InventoryArrowUp = UIImage.ofResource("/assets/tewxx/moduleuparrow.png").constrain {
+            val InventoryArrowUp = UIImage.ofResource("/assets/moduleuparrow.png").constrain {
                 x = (2177/scalefactor).pixels(alignOpposite = false)
                 y = (71/scalefactor).pixels(alignOpposite = false)
                 width = (12 / scalefactor).pixels()
                 height = (5 / scalefactor).pixels()
             } childOf Inventorycontainer
 
-            val InventoryModuleIcon = UIImage.ofResource("/assets/tewxx/inventoryicon.png").constrain {
+            val InventoryModuleIcon = UIImage.ofResource("/assets/home/images/inventoryicon.png").constrain {
                 x = (1929/scalefactor).pixels(alignOpposite = false)
                 y = (62/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
@@ -740,7 +747,13 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     combatTimer?.cancel()
                     combatTimer = null
                     Combatcontainer.hide()
+                    ArrowCombat.animate {
+                        setXAnimation(Animations.IN_OUT_CUBIC, 0.25f, 89.pixels)
+                    }
                 } else {
+                    ArrowCombat.animate {
+                        setXAnimation(Animations.IN_OUT_CUBIC, 0.25f, 83.pixels)
+                    }
                     Combatcontainer.unhide()
                     combatTimer = Timer().apply {
                         scheduleAtFixedRate(object : TimerTask() {
@@ -772,8 +785,14 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     blatantTimer?.cancel()
                     blatantTimer = null
                     Blatantcontainer.hide()
+                    ArrowBlatant.animate {
+                        setXAnimation(Animations.IN_OUT_CUBIC, 0.25f, 89.pixels)
+                    }
                 } else {
                     Blatantcontainer.unhide()
+                    ArrowBlatant.animate {
+                        setXAnimation(Animations.IN_OUT_CUBIC, 0.25f, 83.pixels)
+                    }
                     blatantTimer = Timer().apply {
                         scheduleAtFixedRate(object : TimerTask() {
                             override fun run() {
@@ -804,8 +823,14 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     renderTimer?.cancel()
                     renderTimer = null
                     Rendercontainer.hide()
+                    ArrowRender.animate {
+                        setXAnimation(Animations.IN_OUT_CUBIC, 0.25f, 89.pixels)
+                    }
                 } else {
                     Rendercontainer.unhide()
+                    ArrowRender.animate {
+                        setXAnimation(Animations.IN_OUT_CUBIC, 0.25f, 83.pixels)
+                    }
                     renderTimer = Timer().apply {
                         scheduleAtFixedRate(object : TimerTask() {
                             override fun run() {
@@ -836,8 +861,14 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     utilityTimer?.cancel()
                     utilityTimer = null
                     Utilitycontainer.hide()
+                    ArrowUtility.animate {
+                        setXAnimation(Animations.IN_OUT_CUBIC, 0.25f, 89.pixels)
+                    }
                 } else {
                     Utilitycontainer.unhide()
+                    ArrowUtility.animate {
+                        setXAnimation(Animations.IN_OUT_CUBIC, 0.25f, 83.pixels)
+                    }
                     utilityTimer = Timer().apply {
                         scheduleAtFixedRate(object : TimerTask() {
                             override fun run() {
@@ -868,8 +899,14 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     worldTimer?.cancel()
                     worldTimer = null
                     Worldcontainer.hide()
+                    ArrowWorld.animate {
+                        setXAnimation(Animations.IN_OUT_CUBIC, 0.25f, 89.pixels)
+                    }
                 } else {
                     Worldcontainer.unhide()
+                    ArrowWorld.animate {
+                        setXAnimation(Animations.IN_OUT_CUBIC, 0.25f, 83.pixels)
+                    }
                     worldTimer = Timer().apply {
                         scheduleAtFixedRate(object : TimerTask() {
                             override fun run() {
@@ -900,8 +937,14 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                     inventoryTimer?.cancel()
                     inventoryTimer = null
                     Inventorycontainer.hide()
+                    ArrowInventory.animate {
+                        setXAnimation(Animations.IN_OUT_CUBIC, 0.25f, 89.pixels)
+                    }
                 } else {
                     Inventorycontainer.unhide()
+                    ArrowInventory.animate {
+                        setXAnimation(Animations.IN_OUT_CUBIC, 0.25f, 83.pixels)
+                    }
                     inventoryTimer = Timer().apply {
                         scheduleAtFixedRate(object : TimerTask() {
                             override fun run() {

@@ -13,27 +13,31 @@ object DraggableClass {
 
         if (!moveableComponent.isDragging || mouseButton != 0) {
             component.onMouseDrag { mouseX, mouseY, mouseButton ->
-
+                if (mouseButton == 0) {
+                    moveableComponent.isDragging = true
+                    moveableComponent.dragOffset = Pair(mouseX, mouseY)
+                }
             }
         }
 
-        val absolutX = x + component.getLeft()
-        val absolutY = y + component.getTop()
+        if (moveableComponent.isDragging) {
+            val absolutX = x + component.getLeft()
+            val absolutY = y + component.getTop()
 
-        val deltaX = absolutX - moveableComponent.dragOffset.first
-        val deltaY = absolutY - moveableComponent.dragOffset.second
+            val deltaX = absolutX - moveableComponent.dragOffset.first
+            val deltaY = absolutY - moveableComponent.dragOffset.second
 
-        moveableComponent.dragOffset = Pair(absolutX, absolutY)
+            moveableComponent.dragOffset = Pair(absolutX, absolutY)
 
-        val newX = component.getLeft() + deltaX
-        val newY = component.getTop() + deltaY
+            val newX = component.getLeft() + deltaX
+            val newY = component.getTop() + deltaY
 
-        component.setX(PixelConstraint(newX))
-        component.setY(PixelConstraint(newY))
+            component.setX(PixelConstraint(newX))
+            component.setY(PixelConstraint(newY))
+        }
     }
 
-    // Function to attach the onMouseDragHandler to HomeTopBarRounded
-    fun makeHomeTopBarRoundedDraggable(HomeTopBarRounded: UIComponent) {
-        HomeTopBarRounded.onMouseDrag(onMouseDragHandler)
+    fun makeComponentDraggable(component: UIComponent) {
+        component.onMouseDrag(onMouseDragHandler)
     }
 }

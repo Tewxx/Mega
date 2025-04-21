@@ -1,14 +1,16 @@
 package com.github.tewxx.mega.events
 
+import DraggableClass
 import GuiUtils
 import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.UIComponent
 import gg.essential.elementa.WindowScreen
 import gg.essential.elementa.components.*
-import gg.essential.elementa.components.inspector.Inspector
 import gg.essential.elementa.constraints.animation.Animations
 import gg.essential.elementa.dsl.*
 import gg.essential.universal.UMatrixStack
+import org.afterlike.slumber.util.SlumberFontRenderer
+import org.afterlike.slumber.util.SlumberFonts
 import java.awt.Color
 import java.util.*
 
@@ -206,13 +208,15 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
 
             // Home - text
 
-            val CombatText = UIImage.ofResource("/assets/home/text/CombatText.png").constrain {
-                x = (94/scalefactor).pixels(alignOpposite = false)
-                y = (116/scalefactor).pixels(alignOpposite = false)
-                width = (70 / scalefactor).pixels()
-                height = (15 / scalefactor).pixels()
-            } childOf window
-
+            val CombatText = UIText("Combat")
+                .apply {
+                    setFontProvider(SlumberFonts.PROXIMA_NOVA)
+                }
+                .constrain {
+                    x = (94 / scalefactor).pixels(alignOpposite = false)
+                    y = (116 / scalefactor).pixels(alignOpposite = false)
+                    color = Color.WHITE.constraint
+                } childOf window
 
             val BlatantText = UIImage.ofResource("/assets/home/text/BlatantText.png").constrain {
                 x = (95/scalefactor).pixels(alignOpposite = false)

@@ -1,7 +1,6 @@
 import gg.essential.elementa.state.BasicState
 import java.awt.Color
-import java.util.Timer
-import java.util.TimerTask
+import java.util.*
 
 object GuiUtils {
     var rainbowColor = BasicState(Color.RED)

@@ -1,11 +1,14 @@
 package com.github.tewxx.mega.events
 
+import DraggableClass
 import GuiUtils
 import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.UIComponent
 import gg.essential.elementa.WindowScreen
-import gg.essential.elementa.components.*
-import gg.essential.elementa.components.inspector.Inspector
+import gg.essential.elementa.components.UIBlock
+import gg.essential.elementa.components.UIContainer
+import gg.essential.elementa.components.UIImage
+import gg.essential.elementa.components.UIRoundedRectangle
 import gg.essential.elementa.constraints.animation.Animations
 import gg.essential.elementa.dsl.*
 import gg.essential.universal.UMatrixStack

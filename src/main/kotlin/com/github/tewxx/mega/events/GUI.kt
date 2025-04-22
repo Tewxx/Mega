@@ -84,7 +84,6 @@ class GUI : WindowScreen(ElementaVersion.V7, newGuiScale = 2, drawDefaultBackgro
             height = (32 / scalefactor).pixels()
         } childOf window
 
-
         val HomeVapeImage = UIImage.ofResource("/assets/home/images/logo.png").constrain {
             x = (62/scalefactor).pixels(alignOpposite = false)
             y = (64/scalefactor).pixels(alignOpposite = false)
@@ -443,6 +442,84 @@ class GUI : WindowScreen(ElementaVersion.V7, newGuiScale = 2, drawDefaultBackgro
                 width = (64 / scalefactor).pixels()
                 height = (19 / scalefactor).pixels()
             } childOf Combatcontainer
+
+        // MODULES -- COMBAT
+
+        val combatModules = listOf("AutoClicker", "Reach", "FastPlace", "Sprint", "Velocity")
+        val startX = 339 / scalefactor // Updated starting x position for combat
+        val startY = 97 / scalefactor
+        val yIncrement = 53 / scalefactor
+        val combatTimers = mutableMapOf<String, Timer?>()
+        val combatTransparency = mutableMapOf<String, Boolean>()
+
+        combatModules.forEachIndexed { index, moduleName ->
+            val moduleY = startY + (yIncrement * index)
+
+            // Create the color change area
+            val colorChangeArea = UIBlock().constrain {
+                color = Color(31, 30, 31, 0).constraint
+                x = startX.pixels(alignOpposite = false) // Updated x position
+                y = moduleY.pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (52 / scalefactor).pixels()
+            } childOf Combatcontainer
+
+            // Create the text
+            val moduleText = UIText(moduleName, shadow = false)
+                .apply {
+                    setFontProvider(SlumberFonts.PROXIMA_NOVA)
+                }
+                .constrain {
+                    x = (339 / scalefactor).pixels(alignOpposite = false)
+                    y = (moduleY + 20 / scalefactor).pixels(alignOpposite = false)
+                    color = Color.WHITE.constraint
+                    // Set a fixed width that fits the longest text
+                    width = (100 / scalefactor).pixels()  // Increased from 64 to 100
+                    height = (19 / scalefactor).pixels()
+                } childOf Combatcontainer
+
+            // Create the click detector
+            val clickArea = UIBlock().constrain {
+                color = Color(31, 30, 31, 0).constraint
+                x = startX.pixels(alignOpposite = false) // Updated x position
+                y = moduleY.pixels(alignOpposite = false)
+                width = (290 / scalefactor).pixels()
+                height = (52 / scalefactor).pixels()
+            } childOf Combatcontainer
+
+            // Initialize transparency and timer
+            combatTransparency[moduleName] = true
+            combatTimers[moduleName] = null
+
+            // Add click logic
+            clickArea.onMouseClick {
+                println("Click detected on $moduleName") // Debug: Confirm click detection
+
+                val isTransparent = combatTransparency[moduleName] ?: true
+                combatTransparency[moduleName] = !isTransparent
+
+                colorChangeArea.setColor(if (isTransparent) Color(31, 30, 31, 255) else Color(31, 30, 31, 0))
+                println("Transparency toggled for $moduleName: $isTransparent") // Debug: Confirm transparency toggle
+
+                if (isTransparent) {
+                    moduleText.setColor(Color.WHITE)
+                    combatTimers[moduleName]?.cancel()
+                    combatTimers[moduleName] = null
+                    println("Stopped rainbow effect for $moduleName") // Debug: Confirm timer cancellation
+                } else {
+                    combatTimers[moduleName] = Timer().apply {
+                        scheduleAtFixedRate(object : TimerTask() {
+                            override fun run() {
+                                val rainbowColor = GuiUtils.rainbowColor.get()
+                                moduleText.setColor(rainbowColor)
+                                println("Updated color for $moduleName: $rainbowColor") // Debug: Confirm color update
+                            }
+                        }, 0, 50)
+                    }
+                    println("Started rainbow effect for $moduleName") // Debug: Confirm timer start
+                }
+            }
+
 
 
         // Blatant
@@ -1020,4 +1097,4 @@ class GUI : WindowScreen(ElementaVersion.V7, newGuiScale = 2, drawDefaultBackgro
         }
 
     }
-}
+}}

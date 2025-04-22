@@ -51,7 +51,6 @@ class TARGETHUD {
             x = (70 / scalefactor).pixels(alignOpposite = false)
             y = (32 / scalefactor).pixels(alignOpposite = false)
             color = Color.WHITE.constraint
-            width = (64 / scalefactor).pixels()
             height = (24 / scalefactor).pixels()
         } childOf hudContainer
 

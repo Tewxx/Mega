@@ -14,7 +14,7 @@ import org.afterlike.slumber.util.SlumberFonts
 import java.awt.Color
 import java.util.*
 
-class GUI : WindowScreen(ElementaVersion.V7, newGuiScale = 2, drawDefaultBackground = true) {
+class GUI : WindowScreen(ElementaVersion.V7, newGuiScale = 2, drawDefaultBackground = false) {
     private var isTransparent = true
     private var isCombatTabVisible = false
 
@@ -26,7 +26,6 @@ class GUI : WindowScreen(ElementaVersion.V7, newGuiScale = 2, drawDefaultBackgro
         // Main Elementa Stuff
         //Inspector(window) childOf window
         val scalefactor = 2.5;
-
 
         //Home
         val HomeBack = UIRoundedRectangle(3f).constrain {
@@ -53,12 +52,28 @@ class GUI : WindowScreen(ElementaVersion.V7, newGuiScale = 2, drawDefaultBackgro
             height = (47 / scalefactor).pixels()
         } childOf window
 
+        val HomeTopBarDraggable =  UIRoundedRectangle(3f).constrain {
+            color = Color(31,30,31,0).constraint
+            x = (50/scalefactor).pixels(alignOpposite = false)
+            y = (50/scalefactor).pixels(alignOpposite = false)
+            width = (290 / scalefactor).pixels()
+            height = (47 / scalefactor).pixels()
+        } childOf window
+
         val HomeMiddleBar = UIBlock().constrain {
             color = Color(0x141414).constraint
             x = (50/scalefactor).pixels(alignOpposite = false)
             y = (409/scalefactor).pixels(alignOpposite = false)
             width = (290 / scalefactor).pixels()
             height = (33 / scalefactor).pixels()
+        } childOf window
+
+        val HomeBottomUnRounded = UIRoundedRectangle(0f).constrain {
+            color = Color(0x141414).constraint
+            x = (50/scalefactor).pixels(alignOpposite = false)
+            y = (546/scalefactor).pixels(alignOpposite = false)
+            width = (290 / scalefactor).pixels()
+            height = (17 / scalefactor).pixels()
         } childOf window
 
         val HomeBottomRounded = UIRoundedRectangle(3f).constrain {
@@ -69,13 +84,6 @@ class GUI : WindowScreen(ElementaVersion.V7, newGuiScale = 2, drawDefaultBackgro
             height = (32 / scalefactor).pixels()
         } childOf window
 
-        val HomeBottomUnRounded = UIRoundedRectangle(0f).constrain {
-            color = Color(0x141414).constraint
-            x = (50/scalefactor).pixels(alignOpposite = false)
-            y = (546/scalefactor).pixels(alignOpposite = false)
-            width = (290 / scalefactor).pixels()
-            height = (17 / scalefactor).pixels()
-        } childOf window
 
         val HomeVapeImage = UIImage.ofResource("/assets/home/images/logo.png").constrain {
             x = (62/scalefactor).pixels(alignOpposite = false)

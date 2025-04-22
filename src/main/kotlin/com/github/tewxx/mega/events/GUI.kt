@@ -14,23 +14,9 @@ import org.afterlike.slumber.util.SlumberFonts
 import java.awt.Color
 import java.util.*
 
-class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackground = false) {
+class GUI : WindowScreen(ElementaVersion.V8, newGuiScale = 2, drawDefaultBackground = true) {
     private var isTransparent = true
     private var isCombatTabVisible = false
-
-
-    override fun onDrawScreen(matrixStack: UMatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
-        drawDefaultBackground()
-        super.onDrawScreen(matrixStack, mouseX, mouseY, partialTicks)
-    }
-
-    override fun afterInitialization() {
-        super.afterInitialization()
-    }
-
-    override fun onScreenClose() {
-        super.onScreenClose()
-    }
 
     fun setupDraggableComponent(component: UIComponent) {
         DraggableClass.makeComponentDraggable(component)
@@ -40,8 +26,9 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             // Main Elementa Stuff
             //Inspector(window) childOf window
             val scalefactor = 2.5;
-            //Home
 
+
+            //Home
             val HomeBack = UIRoundedRectangle(3f).constrain {
                 color = Color(0x1A191A).constraint
                 x = (50/scalefactor).pixels(alignOpposite = false)
@@ -172,8 +159,8 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             } childOf window
 
             val HomeBlatantIcon = UIImage.ofResource("/assets/home/images/blatanticon.png").constrain {
-                x = (67/scalefactor).pixels(alignOpposite = false)
-                y = (165/scalefactor).pixels(alignOpposite = false)
+                x = (68/scalefactor).pixels(alignOpposite = false)
+                y = (164/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
                 height = (20 / scalefactor).pixels()
             } childOf window
@@ -186,72 +173,99 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             } childOf window
 
             val HomeUtilityIcon = UIImage.ofResource("/assets/home/images/utilityicon.png").constrain {
-                x = (68/scalefactor).pixels(alignOpposite = false)
+                x = (69/scalefactor).pixels(alignOpposite = false)
                 y = (269/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
                 height = (19 / scalefactor).pixels()
             } childOf window
 
             val HomeWorldIcon = UIImage.ofResource("/assets/home/images/worldicon.png").constrain {
-                x = (68/scalefactor).pixels(alignOpposite = false)
+                x = (69/scalefactor).pixels(alignOpposite = false)
                 y = (321/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
                 height = (20 / scalefactor).pixels()
             } childOf window
 
             val HomeInventoryIcon = UIImage.ofResource("/assets/home/images/inventoryicon.png").constrain {
-                x = (68/scalefactor).pixels(alignOpposite = false)
+                x = (69/scalefactor).pixels(alignOpposite = false)
                 y = (373/scalefactor).pixels(alignOpposite = false)
                 width = (20 / scalefactor).pixels()
                 height = (19 / scalefactor).pixels()
             } childOf window
 
             // Home - text
-
-            val CombatText = UIText("Combat")
+            // ALL TEXT FROM DESIGN -- Y+4
+            val CombatText = UIText("Combat", shadow = false)
                 .apply {
                     setFontProvider(SlumberFonts.PROXIMA_NOVA)
                 }
                 .constrain {
-                    x = (94 / scalefactor).pixels(alignOpposite = false)
-                    y = (116 / scalefactor).pixels(alignOpposite = false)
+                    x = (93 / scalefactor).pixels(alignOpposite = false)
+                    y = (117/scalefactor).pixels(alignOpposite = false)
                     color = Color.WHITE.constraint
+                    width = (64/ scalefactor).pixels()
+                    height = (19/ scalefactor).pixels()
                 } childOf window
 
-            val BlatantText = UIImage.ofResource("/assets/home/text/BlatantText.png").constrain {
-                x = (95/scalefactor).pixels(alignOpposite = false)
-                y = (167/scalefactor).pixels(alignOpposite = false)
-                width = (63 / scalefactor).pixels()
-                height = (15 / scalefactor).pixels()
-            } childOf window
+            val BlatantText = UIText("Blatant", shadow = false)
+                .apply {
+                    setFontProvider(SlumberFonts.PROXIMA_NOVA)
+                }
+                .constrain {
+                    x = (95 / scalefactor).pixels(alignOpposite = false)
+                    y = (169 / scalefactor).pixels(alignOpposite = false)
+                    color = Color.WHITE.constraint
+                    width = (57 / scalefactor).pixels()
+                    height = (19 / scalefactor).pixels()
+                } childOf window
 
-            val RenderText = UIImage.ofResource("/assets/home/text/RenderText.png").constrain {
-                x = (94/scalefactor).pixels(alignOpposite = false)
-                y = (220/scalefactor).pixels(alignOpposite = false)
-                width = (67 / scalefactor).pixels()
-                height = (15 / scalefactor).pixels()
-            } childOf window
+            val RenderText = UIText("Render", shadow = false)
+                .apply {
+                    setFontProvider(SlumberFonts.PROXIMA_NOVA)
+                }
+                .constrain {
+                    x = (95 / scalefactor).pixels(alignOpposite = false)
+                    y = (221 / scalefactor).pixels(alignOpposite = false)
+                    color = Color.WHITE.constraint
+                    width = (59 / scalefactor).pixels()
+                    height = (19 / scalefactor).pixels()
+                } childOf window
 
-            val UtilityText = UIImage.ofResource("/assets/home/text/UtilityText.png").constrain {
-                x = (95/scalefactor).pixels(alignOpposite = false)
-                y = (269/scalefactor).pixels(alignOpposite = false)
-                width = (52 / scalefactor).pixels()
-                height = (19 / scalefactor).pixels()
-            } childOf window
+            val UtilityText = UIText("Utility", shadow = false)
+                .apply {
+                    setFontProvider(SlumberFonts.PROXIMA_NOVA)
+                }
+                .constrain {
+                    x = (95 / scalefactor).pixels(alignOpposite = false)
+                    y = (271 / scalefactor).pixels(alignOpposite = false)
+                    color = Color.WHITE.constraint
+                    width = (46 / scalefactor).pixels()
+                    height = (19 / scalefactor).pixels()
+                } childOf window
 
-            val WorldText = UIImage.ofResource("/assets/home/text/WorldText.png").constrain {
-                x = (95/scalefactor).pixels(alignOpposite = false)
-                y = (323/scalefactor).pixels(alignOpposite = false)
-                width = (54 / scalefactor).pixels()
-                height = (15 / scalefactor).pixels()
-            } childOf window
+            val WorldText = UIText("World", shadow = false)
+                .apply {
+                    setFontProvider(SlumberFonts.PROXIMA_NOVA)
+                }
+                .constrain {
+                    x = (96 / scalefactor).pixels(alignOpposite = false)
+                    y = (324 / scalefactor).pixels(alignOpposite = false)
+                    color = Color.WHITE.constraint
+                    width = (48 / scalefactor).pixels()
+                    height = (19 / scalefactor).pixels()
+                } childOf window
 
-            val InventoryText = UIImage.ofResource("/assets/home/text/InventoryText.png").constrain {
-                x = (96/scalefactor).pixels(alignOpposite = false)
-                y = (374/scalefactor).pixels(alignOpposite = false)
-                width = (84 / scalefactor).pixels()
-                height = (18 / scalefactor).pixels()
-            } childOf window
+            val InventoryText = UIText("Inventory", shadow = false)
+                .apply {
+                    setFontProvider(SlumberFonts.PROXIMA_NOVA)
+                }
+                .constrain {
+                    x = (95 / scalefactor).pixels(alignOpposite = false)
+                    y = (376 / scalefactor).pixels(alignOpposite = false)
+                    color = Color.WHITE.constraint
+                    width = (76 / scalefactor).pixels()
+                    height = (19 / scalefactor).pixels()
+                } childOf window
 
             val MiscText = UIImage.ofResource("/assets/home/text/MISCText.png").constrain {
                 x = (67/scalefactor).pixels(alignOpposite = false)
@@ -273,20 +287,6 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
                 width = (58 / scalefactor).pixels()
                 height = (13 / scalefactor).pixels()
             } childOf window
-
-            /*UIText("Recreated by Mega").constrain {
-                color = Color(255,255,255,100).constraint // Makes it half transparent
-                textScale = 0.50.pixels()
-                x = (60 / scalefactor).pixels(alignOpposite = false)
-                y = (612 / scalefactor).pixels(alignOpposite = false)
-            } childOf window
-
-            UIText("Myau 4.17").constrain {
-                color = Color(255,255,255,100).constraint // Makes it half transparent
-                textScale = 0.50.pixels()
-                x = (275 / scalefactor).pixels(alignOpposite = false)
-                y = (612 / scalefactor).pixels(alignOpposite = false)
-            } childOf window*/
 
             // Home - arrows
 

@@ -11,9 +11,6 @@ object SlumberFonts {
     private val PROXIMA_NOVA_FONT  = Font.fromResource("/fonts/ProximaNova")
 
     @JvmStatic
-    val PROXIMA_NOVA = SlumberFontRenderer(PROXIMA_NOVA_FONT)
-
-    @JvmStatic
     val INTER = SlumberFontRenderer(INTER_FONT, INTER_BOLD_FONT)
 
     @JvmStatic
@@ -27,4 +24,7 @@ object SlumberFonts {
 
     @JvmStatic
     val INTER_EXTRABOLD = SlumberFontRenderer(INTER_EXTRABOLD_FONT)
+
+    @JvmStatic
+    val PROXIMA_NOVA = SlumberFontRenderer(PROXIMA_NOVA_FONT)
 }

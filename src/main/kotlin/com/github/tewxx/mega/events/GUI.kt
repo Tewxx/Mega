@@ -14,23 +14,9 @@ import org.afterlike.slumber.util.SlumberFonts
 import java.awt.Color
 import java.util.*
 
-class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackground = false) {
+class GUI : WindowScreen(ElementaVersion.V8, newGuiScale = 2, drawDefaultBackground = true) {
     private var isTransparent = true
     private var isCombatTabVisible = false
-
-
-    override fun onDrawScreen(matrixStack: UMatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
-        drawDefaultBackground()
-        super.onDrawScreen(matrixStack, mouseX, mouseY, partialTicks)
-    }
-
-    override fun afterInitialization() {
-        super.afterInitialization()
-    }
-
-    override fun onScreenClose() {
-        super.onScreenClose()
-    }
 
     fun setupDraggableComponent(component: UIComponent) {
         DraggableClass.makeComponentDraggable(component)
@@ -40,8 +26,9 @@ class GUI : WindowScreen(ElementaVersion.V2, newGuiScale = 2, drawDefaultBackgro
             // Main Elementa Stuff
             //Inspector(window) childOf window
             val scalefactor = 2.5;
-            //Home
 
+
+            //Home
             val HomeBack = UIRoundedRectangle(3f).constrain {
                 color = Color(0x1A191A).constraint
                 x = (50/scalefactor).pixels(alignOpposite = false)

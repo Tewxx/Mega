@@ -6,6 +6,8 @@ import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.UIComponent
 import gg.essential.elementa.WindowScreen
 import gg.essential.elementa.components.*
+import gg.essential.elementa.components.inspector.Inspector
+import gg.essential.elementa.constraints.ScaledTextConstraint
 import gg.essential.elementa.constraints.animation.Animations
 import gg.essential.elementa.dsl.*
 import gg.essential.universal.UMatrixStack
@@ -445,7 +447,7 @@ class GUI : WindowScreen(ElementaVersion.V7, newGuiScale = 2, drawDefaultBackgro
 
         // MODULES -- COMBAT
 
-        val combatModules = listOf("AutoClicker", "Reach", "FastPlace", "Sprint", "Velocity")
+        val combatModules = listOf("AutoClicker", "Reach", "Sprint", "Velocity", "KillAura", "FastPlace")
         val startX = 339 / scalefactor // Updated starting x position for combat
         val startY = 97 / scalefactor
         val yIncrement = 53 / scalefactor
@@ -455,10 +457,9 @@ class GUI : WindowScreen(ElementaVersion.V7, newGuiScale = 2, drawDefaultBackgro
         combatModules.forEachIndexed { index, moduleName ->
             val moduleY = startY + (yIncrement * index)
 
-            // Create the color change area
             val colorChangeArea = UIBlock().constrain {
-                color = Color(31, 30, 31, 0).constraint
-                x = startX.pixels(alignOpposite = false) // Updated x position
+                color = Color(26, 25, 26, ).constraint
+                x = (startX + 20 / scalefactor).pixels(alignOpposite = false)
                 y = moduleY.pixels(alignOpposite = false)
                 width = (290 / scalefactor).pixels()
                 height = (52 / scalefactor).pixels()
@@ -470,18 +471,16 @@ class GUI : WindowScreen(ElementaVersion.V7, newGuiScale = 2, drawDefaultBackgro
                     setFontProvider(SlumberFonts.PROXIMA_NOVA)
                 }
                 .constrain {
-                    x = (339 / scalefactor).pixels(alignOpposite = false)
+                    x = (startX + 35 / scalefactor).pixels(alignOpposite = false) // Adjusted for text alignment
                     y = (moduleY + 20 / scalefactor).pixels(alignOpposite = false)
                     color = Color.WHITE.constraint
-                    // Set a fixed width that fits the longest text
-                    width = (100 / scalefactor).pixels()  // Increased from 64 to 100
-                    height = (19 / scalefactor).pixels()
+                    width = ScaledTextConstraint(0.65f)
                 } childOf Combatcontainer
 
             // Create the click detector
             val clickArea = UIBlock().constrain {
-                color = Color(31, 30, 31, 0).constraint
-                x = startX.pixels(alignOpposite = false) // Updated x position
+                color = Color(0 , 0, 0, 0 ).constraint
+                x = (startX + 20 / scalefactor).pixels(alignOpposite = false)
                 y = moduleY.pixels(alignOpposite = false)
                 width = (290 / scalefactor).pixels()
                 height = (52 / scalefactor).pixels()
@@ -491,32 +490,31 @@ class GUI : WindowScreen(ElementaVersion.V7, newGuiScale = 2, drawDefaultBackgro
             combatTransparency[moduleName] = true
             combatTimers[moduleName] = null
 
-            // Add click logic
             clickArea.onMouseClick {
-                println("Click detected on $moduleName") // Debug: Confirm click detection
+                println("Click detected on $moduleName")
 
                 val isTransparent = combatTransparency[moduleName] ?: true
                 combatTransparency[moduleName] = !isTransparent
 
                 colorChangeArea.setColor(if (isTransparent) Color(31, 30, 31, 255) else Color(31, 30, 31, 0))
-                println("Transparency toggled for $moduleName: $isTransparent") // Debug: Confirm transparency toggle
+                println("Transparency toggled for $moduleName: $isTransparent")
 
                 if (isTransparent) {
                     moduleText.setColor(Color.WHITE)
                     combatTimers[moduleName]?.cancel()
                     combatTimers[moduleName] = null
-                    println("Stopped rainbow effect for $moduleName") // Debug: Confirm timer cancellation
+                    println("Stopped rainbow effect for $moduleName")
                 } else {
                     combatTimers[moduleName] = Timer().apply {
                         scheduleAtFixedRate(object : TimerTask() {
                             override fun run() {
                                 val rainbowColor = GuiUtils.rainbowColor.get()
                                 moduleText.setColor(rainbowColor)
-                                println("Updated color for $moduleName: $rainbowColor") // Debug: Confirm color update
+                                println("Updated color for $moduleName: $rainbowColor")
                             }
                         }, 0, 50)
                     }
-                    println("Started rainbow effect for $moduleName") // Debug: Confirm timer start
+                    println("Started rainbow effect for $moduleName")
                 }
             }
 
